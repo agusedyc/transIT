@@ -14,6 +14,9 @@ $config = [
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
+            'enableConfirmation' => false,
+            'enableUnconfirmedLogin' => true,
+            'admins' => ['agusedyc'],
         ],
     ],
     'components' => [
@@ -25,8 +28,10 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            // 'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            // 'class' => 'app\components\User',
+            'identityClass' => 'dektrium\user\models\User',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
