@@ -5,21 +5,68 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'name' => 'TransIT',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'as access' => [
+         'class' => '\hscstudio\mimin\components\AccessControl',
+         'allowActions' => [
+            // add wildcard allowed action here!
+            // '*',
+            'user/*',
+            'user/profile/*',
+            'user/security/*',
+            'user/recovery/*',
+            'user/registration/*',
+            // 'gii/*',
+            // 'site/*',
+            // 'debug/*',
+            'mimin/*', // only in dev mode
+            // 'subject/*',
+        ],
+    ],
     'modules' => [
+        'mimin' => [
+            'class' => '\hscstudio\mimin\Module',
+        ],
         'user' => [
             'class' => 'dektrium\user\Module',
+            'modelMap' => [
+                'user' => 'app\models\User',
+            ],
+            'controllerMap' => [
+                'admin' => 'app\controllers\user\AdminController',
+                'recovery' => 'app\controllers\user\RecoveryController',
+                'registration' => 'app\controllers\user\RegistrationController',
+            ],
             'enableConfirmation' => false,
             'enableUnconfirmedLogin' => true,
-            'admins' => ['agusedyc'],
+            'admins' => ['sysadmintrasitusm'],
         ],
     ],
     'components' => [
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager', // only support DbManager
+        ],
+        'assetManager' => [
+            'bundles' => [
+                'dmstr\web\AdminLteAsset' => [
+                    'skin' => 'skin-yellow-light',
+                ],
+            ],
+        ],
+        'view' => [
+             'theme' => [
+                 'pathMap' => [
+                    '@app/views' => '@app/views/admin-lte',
+                    '@dektrium/user/views' => '@app/views/user',
+                 ],
+             ],
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'puiPI-1uWS4mVun85LjVnuTK2BUjhxBR',
@@ -70,7 +117,7 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '::1','*'],
     ];
 
     $config['bootstrap'][] = 'gii';

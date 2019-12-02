@@ -21,6 +21,9 @@ $config = [
         ],
     ],
     'components' => [
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager', // only support DbManager
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],

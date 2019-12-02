@@ -7,7 +7,8 @@ services:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - .:/app:delegated
     ports:
-      - 30080:80
+      - 4080:80
+    restart: always
     links:
       - mariadb
     # environment:
@@ -19,7 +20,7 @@ services:
       # - ./docker/dbdata:/var/lib/mysql
       - apps_persistent:/var/lib/mysql
     ports:
-      - 33306:3306
+      - 4306:3306
     restart: always
     environment:
       - TZ=Asia/Jakarta
@@ -33,7 +34,8 @@ services:
     depends_on:
       - mariadb
     ports:
-      - 38181:80
+      - 4181:80
+    restart: always
     environment:
       - PMA_HOST=mariadb
       
