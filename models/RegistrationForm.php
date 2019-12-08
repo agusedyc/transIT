@@ -7,6 +7,16 @@ use Yii;
 class RegistrationForm extends BaseRegistrationForm
 {
     /**
+     * @var string User NIM
+     */
+    public $nim;
+    
+    /**
+     * @var string User Full Name
+     */
+    public $full_name;
+
+    /**
      * @var string User email address
      */
     public $email;
@@ -16,9 +26,7 @@ class RegistrationForm extends BaseRegistrationForm
      */
     public $username;
 
-    /**
-     * @var string Password
-     */
+  
     public $password;
 
     public $item_name;
@@ -31,7 +39,22 @@ class RegistrationForm extends BaseRegistrationForm
         $user = $this->module->modelMap['User'];
 
         return [
-        	// [['role'],'string'],
+        	[['item_name'],'string'],
+            // nim rules
+            // 'nimTrim'     => ['nim', 'trim'],
+            // 'nimLength'   => ['nim', 'string', 'min' => 13, 'max' => 13],
+            // 'nimPattern'  => ['nim', 'match', 'pattern' => '/^[G].[0-9][0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]$/m'],
+            'nimRequired' => ['nim', 'required'],
+            'nimUnique'   => [
+                'nim',
+                'unique',
+                'targetClass' => $user,
+                'message' => Yii::t('user', 'This nim has already been taken'),
+            ],
+            // full_name rules
+            'full_nameTrim'     => ['full_name', 'trim'],
+            'full_nameRequired' => ['full_name', 'required'],
+
             // username rules
             'usernameTrim'     => ['username', 'trim'],
             'usernameLength'   => ['username', 'string', 'min' => 3, 'max' => 255],
@@ -41,7 +64,7 @@ class RegistrationForm extends BaseRegistrationForm
                 'username',
                 'unique',
                 'targetClass' => $user,
-                'message' => Yii::t('user', 'This username has already been taken')
+                'message' => Yii::t('user', 'This username has already been taken'),
             ],
             // email rules
             'emailTrim'     => ['email', 'trim'],
@@ -51,7 +74,7 @@ class RegistrationForm extends BaseRegistrationForm
                 'email',
                 'unique',
                 'targetClass' => $user,
-                'message' => Yii::t('user', 'This email address has already been taken')
+                'message' => Yii::t('user', 'This email address has already been taken'),
             ],
             // password rules
             'passwordRequired' => ['password', 'required', 'skipOnEmpty' => $this->module->enableGeneratingPassword],
@@ -65,10 +88,12 @@ class RegistrationForm extends BaseRegistrationForm
     public function attributeLabels()
     {
         return [
+            'item_name'=> Yii::t('user', 'Roles'),
+            'nim'      => Yii::t('user', 'NIM'),
+            'full_name'=> Yii::t('user', 'Full Name'),
             'email'    => Yii::t('user', 'Email'),
             'username' => Yii::t('user', 'Username'),
             'password' => Yii::t('user', 'Password'),
-            'item_name' => Yii::t('user', 'Register As'),
         ];
     }
 

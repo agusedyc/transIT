@@ -22,8 +22,9 @@ $config = [
             'user/security/*',
             'user/recovery/*',
             'user/registration/*',
+            'user/register',
             // 'gii/*',
-            // 'site/*',
+            'site/index',
             // 'debug/*',
             'mimin/*', // only in dev mode
             // 'subject/*',
@@ -35,8 +36,16 @@ $config = [
         ],
         'user' => [
             'class' => 'dektrium\user\Module',
+            'mailer' => [
+                'sender'                => ['edyagusc@gmail.com' => 'TransIT Universitas Semarang'],
+                'welcomeSubject'        => 'Welcome subject',
+                'confirmationSubject'   => 'Confirmation subject',
+                'reconfirmationSubject' => 'Email change subject',
+                'recoverySubject'       => 'Recovery subject',
+            ],
             'modelMap' => [
                 'user' => 'app\models\User',
+                'RegistrationForm' => 'app\models\RegistrationForm',
             ],
             'controllerMap' => [
                 'admin' => 'app\controllers\user\AdminController',
@@ -75,10 +84,10 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            // 'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
             // 'class' => 'app\components\User',
-            'identityClass' => 'dektrium\user\models\User',
+            // 'identityClass' => 'dektrium\user\models\User',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -89,6 +98,14 @@ $config = [
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => true,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'transitftikusm@gmail.com',
+                'password' => 'transitftikusm123!',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -124,7 +141,7 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '::1','*'],
     ];
 }
 

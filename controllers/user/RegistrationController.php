@@ -78,12 +78,13 @@ class RegistrationController extends BaseRegistrationController
         }
 
         // $list_role = ArrayHelper::map(AuthItem::find()->where(['not in', 'name', 'Sysadmin'])->andWhere(['type'=>1])->asArray()->all(), 'name', 'name');
+        $list_role = ArrayHelper::map(AuthItem::find()->where(['LIKE', 'name', 'siswa'])->andWhere(['type'=>1])->asArray()->all(), 'name', 'name');
 
         // $this->layout = 'main-login';
         return $this->render('register', [
             'model'  => $model,
             'module' => $this->module,
-            // 'list_role'  => $list_role,
+            'list_role'  => $list_role,
         ]);
     }
 }

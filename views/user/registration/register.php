@@ -24,6 +24,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     'enableAjaxValidation' => true,
                     'enableClientValidation' => false,
                 ]); ?>
+                <?= $form->field($model, 'item_name')->widget(Select2::className(), [
+                    'data' => $list_role,
+                    'hideSearch' => true,
+                    // 'options' => ['placeholder' => 'Change'],
+                    // 'readonly' => true,
+                    'pluginOptions' => [
+                        'allowClear' => true,
+                    ],
+                ]) ?>
+
+                <?= $form->field($model, 'nim')->widget(\yii\widgets\MaskedInput::className(), ['mask' => 'G.999.99.9999',]) ?>
+
+                <?= $form->field($model, 'full_name') ?>
 
                 <?= $form->field($model, 'email') ?>
 
