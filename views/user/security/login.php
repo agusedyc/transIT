@@ -84,8 +84,12 @@ $this->title = 'Sign In';
             </p>
         <?php endif ?>
         <?php if ($module->enableRegistration): ?>
+            <br>
             <p class="text-center">
                 <?= Html::a(Yii::t('user', 'Don\'t have an account? Sign up!'), ['/user/registration/register']) ?>
+            </p>
+            <p class="text-center">
+                <?= Html::a(Yii::t('user', 'Home'), ['/']) ?>
             </p>
         <?php endif ?>
         <?= Connect::widget([
