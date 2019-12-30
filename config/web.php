@@ -37,7 +37,7 @@ $config = [
         'user' => [
             'class' => 'dektrium\user\Module',
             'mailer' => [
-                'sender'                => ['edyagusc@gmail.com' => 'TransIT Universitas Semarang'],
+                'sender'                => ['transitftikusm@gmail.com' => 'TransIT Universitas Semarang'],
                 'welcomeSubject'        => 'Welcome subject',
                 'confirmationSubject'   => 'Confirmation subject',
                 'reconfirmationSubject' => 'Email change subject',
