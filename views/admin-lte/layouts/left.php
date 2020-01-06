@@ -41,6 +41,12 @@
                         ['label' => 'Route', 'icon' => 'dashboard', 'url' => ['/mimin/route'],],
                     ],
                 ],
+                ['label' => 'Pengelola','icon' => 'book','url' => '#','items' => [
+                        ['label' => 'Pembimbing', 'icon' => 'users', 'url' => ['/pembimbing/index'],],
+                        // ['label' => 'Subject', 'icon' => 'file-code-o', 'url' => ['/subject/index'],],
+                        // ['label' => 'Level', 'icon' => 'list-ol', 'url' => ['/level/index'],],
+                    ],
+                ],
                 ['label' => 'Jurnal','icon' => 'book','url' => '#','items' => [
                         // ['label' => 'Course', 'icon' => 'users', 'url' => ['/course/index'],],
                         // ['label' => 'Subject', 'icon' => 'file-code-o', 'url' => ['/subject/index'],],
