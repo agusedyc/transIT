@@ -91,10 +91,11 @@ class Pembimbing extends \yii\db\ActiveRecord
 
     public function getStatus($status)
     {
-        // if (empty($status)) {
-            return $this->status_list[$status];
-        // }else{
-            // return $status;
-        // }
+        return $this->status_list[$status];
+    }
+
+    public function getUserCreate()
+    {
+        return $this->hasOne(User::className(), ['id' => 'created_by']);
     }
 }

@@ -1,7 +1,8 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\searchs\PembimbingSearch */
@@ -28,7 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             // 'id',
-            'pembimbing',
+            // 'pembimbing',
+            [
+                'label' => 'Pembimbing',
+                'attribute' => 'pembimbing',
+                'format' => 'raw',
+                'value' => function($data){
+                    return Html::a($data->pembimbing, ['view', 'id' => $data->id]);
+                },
+            ],
+
             // 'status_active',
             [
                 'label' => 'Status',
@@ -41,6 +51,14 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updated_at',
             //'created_by',
             //'updated_by',
+            [
+                'label' => 'Created By',
+                'attribute' => 'created_by',
+                'format' => 'raw',
+                'value' =>  function($data){
+                    return $data->userCreate->username;
+                },
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
