@@ -52,8 +52,8 @@ $config = [
                 'recovery' => 'app\controllers\user\RecoveryController',
                 'registration' => 'app\controllers\user\RegistrationController',
             ],
-            'enableConfirmation' => false,
-            'enableUnconfirmedLogin' => true,
+            'enableConfirmation' => true,
+            'enableUnconfirmedLogin' => false,
             'admins' => ['sysadmintrasitusm'],
         ],
     ],
@@ -105,7 +105,7 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',
