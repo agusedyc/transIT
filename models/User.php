@@ -5,5 +5,5 @@ use dektrium\user\models\User as BaseUser;
 
 class User extends BaseUser
 {
-    public $status;
+    
 }

@@ -34,13 +34,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ]) ?>
 
-                <?= $form->field($model, 'nim')->widget(\yii\widgets\MaskedInput::className(), ['mask' => 'G.999.99.9999',]) ?>
+                <!-- <?= $form->field($model, 'nim')->widget(\yii\widgets\MaskedInput::className(), ['mask' => 'G.999.99.9999',]) ?> -->
 
-                <?= $form->field($model, 'full_name') ?>
+                <!-- <?= $form->field($model, 'full_name') ?> -->
 
                 <?= $form->field($model, 'email') ?>
 
-                <?= $form->field($model, 'username') ?>
+                <?= $form->field($model, 'username')->widget(\yii\widgets\MaskedInput::className(), ['mask' => 'G.999.99.9999',]) ?>
 
                 <?php if ($module->enableGeneratingPassword == false): ?>
                     <?= $form->field($model, 'password')->passwordInput() ?>

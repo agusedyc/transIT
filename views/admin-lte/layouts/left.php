@@ -31,12 +31,8 @@
         $menuItems = [
                 ['label' => 'TransIT', 'options' => ['class' => 'header']],
                 ['label' => 'User Management','icon' => 'user','url' => '#','items' => [
-                        ['label' => 'User', 'icon' => 'users', 'url' => '#','items' => [
-                                ['label' => 'Manage', 'icon' => 'users', 'url' => ['/user/admin/index'],'visible' => User::findOne(Yii::$app->user->id)->isAdmin,],
-                                ['label' => 'Profile', 'icon' => 'user-o', 'url' => ['/user/settings/profile'],],
-                                ['label' => 'Account', 'icon' => 'user', 'url' => ['/user/settings/account'],],
-                            ],
-                        ],
+                        ['label' => 'Manage Users', 'icon' => 'users', 'url' => ['/user/admin/index'],'visible' => User::findOne(Yii::$app->user->id)->isAdmin,],
+                        ['label' => 'User Account', 'icon' => 'user', 'url' => ['/user/settings/profile'],],
                         ['label' => 'Role', 'icon' => 'dashboard', 'url' => ['/mimin/role'],],
                         ['label' => 'Route', 'icon' => 'dashboard', 'url' => ['/mimin/route'],],
                     ],
