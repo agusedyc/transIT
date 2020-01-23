@@ -2,8 +2,8 @@
 namespace app\controllers\user;
 
 use Yii;
+use app\models\RegistrationForm;
 use dektrium\user\controllers\RegistrationController as BaseRegistrationController;
-use dektrium\user\models\RegistrationForm;
 use dektrium\user\models\User;
 use hscstudio\mimin\models\AuthAssignment;
 use hscstudio\mimin\models\AuthItem;

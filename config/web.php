@@ -17,8 +17,8 @@ $config = [
          'allowActions' => [
             // add wildcard allowed action here!
             // '*',
-            'user/*',
-            'user/profile/*',
+            // 'user/*',
+            // 'user/profile/*',
             'user/security/*',
             'user/recovery/*',
             'user/registration/*',
@@ -26,7 +26,7 @@ $config = [
             // 'gii/*',
             'site/index',
             // 'debug/*',
-            'mimin/*', // only in dev mode
+            // 'mimin/*', // only in dev mode
             // 'subject/*',
         ],
     ],
@@ -38,13 +38,13 @@ $config = [
             'class' => 'dektrium\user\Module',
             'mailer' => [
                 'sender'                => ['transitftikusm@gmail.com' => 'TransIT Universitas Semarang'],
-                'welcomeSubject'        => 'Welcome subject',
-                'confirmationSubject'   => 'Confirmation subject',
-                'reconfirmationSubject' => 'Email change subject',
-                'recoverySubject'       => 'Recovery subject',
+                'welcomeSubject'        => 'Welcome Jurnal TransIT Universitas Semarang',
+                'confirmationSubject'   => 'Confirmation Registration Jurnal TransIT Universitas Semarang',
+                'reconfirmationSubject' => 'Email Confrim Jurnal TransIT Universitas Semarang',
+                'recoverySubject'       => 'Recovery Jurnal TransIT Universitas Semarang',
             ],
             'modelMap' => [
-                'user' => 'app\models\User',
+                'User' => 'app\models\User',
                 'RegistrationForm' => 'app\models\RegistrationForm',
             ],
             'controllerMap' => [
@@ -54,7 +54,7 @@ $config = [
             ],
             'enableConfirmation' => true,
             'enableUnconfirmedLogin' => false,
-            'admins' => ['sysadmintrasitusm'],
+            'admins' => ['sysadmintransit'],
         ],
     ],
     'components' => [
