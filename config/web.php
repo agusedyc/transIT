@@ -25,7 +25,7 @@ $config = [
             'user/register',
             // 'gii/*',
             'site/index',
-            // 'debug/*',
+            'debug/*',
             // 'mimin/*', // only in dev mode
             // 'subject/*',
         ],

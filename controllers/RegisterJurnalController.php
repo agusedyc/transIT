@@ -7,10 +7,14 @@ use app\models\Jurnal;
 use app\models\Pembimbing;
 use app\models\User;
 use dektrium\user\models\Profile;
+use mdm\autonumber\AutoNumber;
+use yii\db\Expression;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
+use yii\helpers\FileHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 class RegisterJurnalController extends \yii\web\Controller
 {
@@ -31,7 +35,7 @@ class RegisterJurnalController extends \yii\web\Controller
             // echo '<pre>';
             // print_r($request);
             // echo '</pre>';
-            // $jurnal->load($request);
+            $jurnal->load($request);
             $jurnal->pembimbing_1 = $request['pembimbing_1'];
             $jurnal->pembimbing_2 = $request['pembimbing_2'];    
             $jurnal->save();
@@ -55,15 +59,30 @@ class RegisterJurnalController extends \yii\web\Controller
         $profile = Profile::findOne($id);
         $list_pembimbing = ArrayHelper::map(Pembimbing::find()->asArray()->all(), 'id', 'pembimbing'); 
         $jurnal = Jurnal::find(['user_id'=>$id])->one(); 
-        $request = Yii::$app->request->post();      
-        if (!empty($request)) {
-            $jurnal->load($request);            
-            $jurnal->save();
-            $profile->load($request);            
-            $profile->save();
+        // $request = Yii::$app->request->post();      
+        if (Yii::$app->request->post()) {
+            $jurnal->jurnal = UploadedFile::getInstance($jurnal, 'jurnal');
+            // echo '<pre>';
+            // // print_r($request);
+            // echo '<br>';
+            // print_r($jurnal->jurnal);
+            // echo '</pre>';
+        // if (!is_null($jurnal->jurnal)) {
+            if ($jurnal->jurnal && $jurnal->validate()) {
+                $path = 'uploads/pre-journal/'.$jurnal->user->username;
+                FileHelper::createDirectory($path);            
+                $jurnal->jurnal->saveAs($path.'/'.$jurnal->jurnal->baseName . '.' . $jurnal->jurnal->extension);
+                $jurnal->jurnal = $path.'/'.$jurnal->jurnal;  
+                $jurnal->updateCounters(['upload_ke'=>1]);
+                $jurnal->tgl_upload = new Expression('NOW()');
+                (empty($jurnal->nourutjurnal)) ? $jurnal->nourutjurnal = AutoNumber::generate('{Y}????') : null ;
+                $jurnal->save();
+                return $this->redirect(['register-jurnal/upload']);
+            }
+
         }
 
-        return $this->render('index',[
+        return $this->render('upload',[
             'profile' => $profile,
             'jurnal' => $jurnal,
             'list_pembimbing' => $list_pembimbing,

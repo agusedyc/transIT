@@ -20,7 +20,9 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "dmstr/yii2-adminlte-asset": "^2.1",
         "dektrium/yii2-user": "^0.9.14",
-        "hscstudio/yii2-mimin": "~1.1.5"
+        "hscstudio/yii2-mimin": "~1.1.5",
+        "mdmsoft/yii2-autonumber": "~1.0",
+        "yii2tech/html2pdf": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

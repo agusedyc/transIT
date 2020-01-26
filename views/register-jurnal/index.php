@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
  * @var dektrium\user\models\Profile $model
  */
 
-$this->title = Yii::t('user', 'Profile settings');
+$this->title = Yii::t('user', 'Registrasi Jurnal');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -49,7 +49,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'validateOnBlur' => false,
                 ]); ?>
 
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">NIM</label>
+                    <div class="col-lg-9">
+                        <?php $user = Yii::$app->user->identity; ?>
+                        <?= Html::textInput('', $user->username, ['class' => 'form-control', 'disabled' => true]); ?>
+                    </div>
+                </div>    
+                
                 <?= $form->field($profile, 'name') ?>
+
+                <?= $form->field($jurnal, 'judul') ?>
+
+                <?= $form->field($jurnal, 'abstrak')->textarea(['rows' => '6']) ?>
 
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Pembimbing 1</label>
