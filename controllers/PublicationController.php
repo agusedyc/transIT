@@ -6,6 +6,7 @@ use Yii;
 use app\models\Publication;
 use app\models\searchs\ArticleSearch;
 use app\models\searchs\PublicationSearch;
+use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -55,7 +56,7 @@ class PublicationController extends Controller
     {
         $searchModel = new ArticleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider->query->andWhere(['pub_id'=>$id]);
         return $this->render('view', [
             'model' => $this->findModel($id),
             'searchModel' => $searchModel,

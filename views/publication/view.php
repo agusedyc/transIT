@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Publications'), 'url
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-
+<?php Pjax::begin(); ?>
 <div class="publication-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
         <?= Html::a(Yii::t('app', 'Back'), ['index'], ['class' => 'btn btn-warning']) ?>
-        <?= Html::a(Yii::t('app', 'Create Article Publikasi'), ['article/create', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
+        <?= Html::a(Yii::t('app', 'Create Article'), ['article/create', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
     </p>
 
 <div class="box box-success box-solid">
@@ -71,7 +71,6 @@ $this->params['breadcrumbs'][] = $this->title;
   </div>
 </div>
 <div class="box-body" style="">
-  <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
@@ -82,7 +81,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             // 'id',
             // 'pub_id',
-            'title',
+            // 'title',
+            [
+                // 'label' => 'Title',
+                'attribute' => 'title',
+                'format' => 'raw',
+                'value' => function($data){
+                    return Html::a($data->title, ['article/view', 'id' => $data->id]);
+                },
+            ],
             // 'slug',
             'author',
             //'abstract:ntext',
@@ -96,13 +103,18 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_by',
             //'updated_by',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            // [
+            // 'class' => 'yii\grid\ActionColumn',
+            // 'template' => '{view} {update} {delete} {myButton}',  // the default buttons + your custom button
+
+            // ]
         ],
     ]); ?>
 
-    <?php Pjax::end(); ?>
+    
 </div>
 </div>
 
 
 </div>
+<?php Pjax::end(); ?>

@@ -11,7 +11,7 @@ $request = Yii::$app->request;
 
 <div class="article-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <!-- <?= $form->field($model, 'pub_id')->textInput() ?> -->
 
@@ -25,7 +25,7 @@ $request = Yii::$app->request;
 
     <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'document')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'document')->fileInput() ?>
 
     <?= $form->field($model, 'issn')->textInput(['maxlength' => true]) ?>
 

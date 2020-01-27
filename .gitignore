@@ -6,3 +6,5 @@ vendor/*
 web/uploads/pre-journal/
 
 composer.lock
+
+web/uploads/article/

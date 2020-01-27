@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\behaviors\BlameableBehavior;
+use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -53,11 +54,11 @@ class Article extends \yii\db\ActiveRecord
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
                 ],
             ],
-            // 'sluggable' => [
-            //     'class' => SluggableBehavior::className(),
-            //     'attribute' => 'name',
-            //     'slugAttribute' => 'slug',
-            // ],
+            'sluggable' => [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'title',
+                'slugAttribute' => 'slug',
+            ],
         ];
     }
 
@@ -71,7 +72,7 @@ class Article extends \yii\db\ActiveRecord
             [['abstract'], 'string'],
             [['title', 'slug'], 'string', 'max' => 765],
             [['author', 'keywords'], 'string', 'max' => 255],
-            [['document'], 'string', 'max' => 300],
+            [['document'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf'],
             [['issn', 'doi'], 'string', 'max' => 50],
             [['pub_id'], 'exist', 'skipOnError' => true, 'targetClass' => Publication::className(), 'targetAttribute' => ['pub_id' => 'id']],
         ];

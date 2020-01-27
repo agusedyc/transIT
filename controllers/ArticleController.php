@@ -4,10 +4,13 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Article;
+use app\models\Publication;
 use app\models\searchs\ArticleSearch;
+use yii\filters\VerbFilter;
+use yii\helpers\FileHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -64,11 +67,19 @@ class ArticleController extends Controller
      */
     public function actionCreate($id)
     {
+        $pub = Publication::findOne($id);
         $model = new Article();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->pub_id = $id;
-            if ($model->save()) {
+            $model->document = UploadedFile::getInstance($model, 'document');
+
+            if ($model->document && $model->validate()) {
+                $path = 'uploads/article/'.'VOL'.$pub->vol.'-NO'.$pub->no.'-'.strtoupper(date('F', mktime(0, 0, 0, $pub->month_pub, 10))).'-'.$pub->years_pub;
+                FileHelper::createDirectory($path);          
+                $model->document->saveAs($path.'/'.$model->document->baseName . '.' . $model->document->extension);
+                $model->document = $path.'/'.$model->document;  
+                $model->pub_id = $id;
+                $model->save();
                 return $this->redirect(['publication/view', 'id' => $id]);    
             }
             
@@ -89,11 +100,21 @@ class ArticleController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $pub = Publication::findOne($model->pub_id);
+        $old_doc = $model->document;
+        if ($model->load(Yii::$app->request->post())) {
+            $model->document = UploadedFile::getInstance($model, 'document');
+            if ($model->document && $model->validate()) {
+                $path = 'uploads/article/'.'VOL'.$pub->vol.'-NO'.$pub->no.'-'.strtoupper(date('F', mktime(0, 0, 0, $pub->month_pub, 10))).'-'.$pub->years_pub;
+                FileHelper::createDirectory($path);          
+                $model->document->saveAs(Yii::getAlias('@web').$path.'/'.$model->document->baseName . '.' . $model->document->extension);
+                $model->document = $path.'/'.$model->document;  
+            }else{
+                $model->document = $old_doc;
+            }
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
         return $this->render('update', [
             'model' => $model,
         ]);
@@ -108,9 +129,10 @@ class ArticleController extends Controller
      */
     public function actionDelete($id)
     {
+
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['publication']);
     }
 
     /**
