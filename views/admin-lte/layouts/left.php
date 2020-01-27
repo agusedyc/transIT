@@ -39,12 +39,13 @@
                 ],
                 ['label' => 'Pengelola','icon' => 'book','url' => '#','items' => [
                         ['label' => 'Pembimbing', 'icon' => 'users', 'url' => ['/pembimbing/index'],],
-                        // ['label' => 'Subject', 'icon' => 'file-code-o', 'url' => ['/subject/index'],],
+                        ['label' => 'Jurnal', 'icon' => 'file-code-o', 'url' => ['/jurnal/index'],],
                         // ['label' => 'Level', 'icon' => 'list-ol', 'url' => ['/level/index'],],
                     ],
                 ],
-                ['label' => 'Jurnal','icon' => 'book','url' => '#','items' => [
-                        // ['label' => 'Course', 'icon' => 'users', 'url' => ['/course/index'],],
+                ['label' => 'Pengajuan Jurnal','icon' => 'book','url' => '#','items' => [
+                        ['label' => 'Registrasi Jurnal', 'icon' => 'files', 'url' => ['/register-jurnal/index'],],
+                        // ['label' => 'Upload Jurnal', 'icon' => 'files', 'url' => ['/register-jurnal/upload'],],
                         // ['label' => 'Subject', 'icon' => 'file-code-o', 'url' => ['/subject/index'],],
                         // ['label' => 'Level', 'icon' => 'list-ol', 'url' => ['/level/index'],],
                     ],
