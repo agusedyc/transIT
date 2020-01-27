@@ -25,7 +25,7 @@ $config = [
             'user/register',
             // 'gii/*',
             'site/index',
-            // 'debug/*',
+            'debug/*',
             // 'mimin/*', // only in dev mode
             // 'subject/*',
         ],
@@ -54,7 +54,7 @@ $config = [
             ],
             'enableConfirmation' => true,
             'enableUnconfirmedLogin' => false,
-            'admins' => ['sysadmintransit'],
+            'admins' => ['sysadmintransit','sysadminapp'],
         ],
     ],
     'components' => [

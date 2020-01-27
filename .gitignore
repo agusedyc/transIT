@@ -3,3 +3,6 @@ assets/*
 vendor/*
 
 *.sublime-workspace
+web/uploads/pre-journal/
+
+composer.lock
