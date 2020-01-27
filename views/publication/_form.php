@@ -1,28 +1,32 @@
 <?php
 
-use kartik\widgets\SwitchInput;
+use kartik\widgets\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Pembimbing */
+/* @var $model app\models\Publication */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="pembimbing-form">
+<div class="publication-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'pembimbing')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'no')->textInput() ?>
 
-    <?= $form->field($model, 'status_active')->widget(SwitchInput::classname(), [
+    <?= $form->field($model, 'vol')->textInput() ?>
+
+    <!-- <?= $form->field($model, 'month_pub')->textInput() ?> -->
+    <?= $form->field($model, 'month_pub')->widget(Select2::classname(), [
+        'data' => $model->list_month,
+        'options' => ['placeholder' => 'Select a month ...'],
         'pluginOptions' => [
-            'onText' => 'Active',
-            'offText' => 'Deactive',
+            'allowClear' => true
         ],
     ]); ?>
 
-    <!-- <?= $form->field($model, 'status_active')->textInput() ?> -->
+    <?= $form->field($model, 'years_pub')->textInput() ?>
 
     <!-- <?= $form->field($model, 'created_at')->textInput() ?> -->
 
