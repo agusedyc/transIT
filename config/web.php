@@ -54,7 +54,7 @@ $config = [
             ],
             'enableConfirmation' => true,
             'enableUnconfirmedLogin' => false,
-            'admins' => ['sysadmintransit'],
+            'admins' => ['sysadmintransit','sysadminapp'],
         ],
     ],
     'components' => [
