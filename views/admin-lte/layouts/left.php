@@ -39,8 +39,8 @@
                 ],
                 ['label' => 'Pengelola','icon' => 'book','url' => '#','items' => [
                         ['label' => 'Pembimbing', 'icon' => 'users', 'url' => ['/pembimbing/index'],],
-                        ['label' => 'Jurnal', 'icon' => 'file-code-o', 'url' => ['/jurnal/index'],],
-                        // ['label' => 'Level', 'icon' => 'list-ol', 'url' => ['/level/index'],],
+                        ['label' => 'Jurnal', 'icon' => 'file', 'url' => ['/jurnal/index'],],
+                        ['label' => 'Publikasi', 'icon' => 'files-o', 'url' => ['/publication/index'],],
                     ],
                 ],
                 ['label' => 'Pengajuan Jurnal','icon' => 'book','url' => '#','items' => [
