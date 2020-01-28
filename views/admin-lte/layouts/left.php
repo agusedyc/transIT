@@ -43,6 +43,7 @@
                         ['label' => 'Publikasi', 'icon' => 'files-o', 'url' => ['/publication/index'],],
                     ],
                 ],
+                ['label' => 'Report','icon' => 'book','url' => ['/report/index']],
                 ['label' => 'Pengajuan Jurnal','icon' => 'book','url' => '#','items' => [
                         ['label' => 'Registrasi Jurnal', 'icon' => 'files', 'url' => ['/register-jurnal/index'],],
                         // ['label' => 'Upload Jurnal', 'icon' => 'files', 'url' => ['/register-jurnal/upload'],],
