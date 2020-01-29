@@ -102,15 +102,8 @@ class RegisterJurnalController extends \yii\web\Controller
             'margin_top' => 2,
             'margin_bottom' => 2,
         ]);
-        // $mpdf->SetWatermarkText('DRAFT');
-        // $mpdf->showWatermarkText = true;
         $mpdf->SetWatermarkImage('uploads/assets/img/usm.jpg',0.1,'P',[0,50]);
-        // $mpdf->SetWatermarkImage('uploads/assets/img/usm.jpg',0.5,'D','P');
-    //      $mpdf->SetWatermarkImage('uploads/assets/img/usm.jpg',1,
-    // '',
-    // array(160,20));
         $mpdf->showWatermarkImage = true;
-        // $mpdf->watermarkImageAlpha = 1;
         $mpdf->WriteHTML($this->renderPartial('upload-validation', [
                 'user' => Yii::$app->user,
                 'profile' => $profile,
@@ -119,21 +112,6 @@ class RegisterJurnalController extends \yii\web\Controller
         ]));
         $mpdf->Output();
         exit;
-    }
-
-    public function kjkdfPrint()
-    {
-        $id = Yii::$app->user->id;
-        $profile = Profile::findOne($id);
-        $jurnal = Jurnal::find(['user_id'=>$id])->one(); 
-
-        return Yii::$app->html2pdf
-            ->render('upload-validation', [
-                'user' => Yii::$app->user,
-                'profile' => $profile,
-                'jurnal' => $jurnal,
-            ])->saveAs('download/'.$jurnal->user->username.'/'.$jurnal->user->username.'.pdf');
-            // ->saveAs('/path/to/output.pdf')
     }
 
 }
