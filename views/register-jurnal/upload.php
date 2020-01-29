@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <div class="alert alert-success alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                 <h4><i class="icon fa fa-check"></i> Jurnal Sudah Di Upload...!</h4>
-                                Silahkan Cetak Bukti Upload.
+                                Silahkan Cetak Bukti Upload <?= Html::a('Cetak Disini', ['/register-jurnal/print'], ['target'=>'_blank']); ?>.
                             </div>
                         <?php endif ?>
                     </div>
