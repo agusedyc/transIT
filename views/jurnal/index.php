@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'user_id',
             [
                 'label' => 'Nama',
-                'attribute' => 'user_id',
+                'attribute' => 'name',
                 'format' => 'raw',
                 'value' => function($data){
                     return Html::a($data->user->profile->name, ['view', 'id' => $data->id]);
