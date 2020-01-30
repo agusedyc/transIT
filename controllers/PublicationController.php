@@ -8,8 +8,10 @@ use app\models\searchs\ArticleSearch;
 use app\models\searchs\PublicationSearch;
 use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
+use yii\helpers\FileHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 /**
  * PublicationController implements the CRUD actions for Publication model.
@@ -73,7 +75,17 @@ class PublicationController extends Controller
     {
         $model = new Publication();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $pub = $model;
+            $model->file_cover = UploadedFile::getInstance($model, 'file_cover');
+            if ($model->file_cover && $model->validate()) {
+                $no_pub = 'VOL'.$pub->vol.'-NO'.$pub->no.'-'.strtoupper(date('F', mktime(0, 0, 0, $pub->month_pub, 10))).'-'.$pub->years_pub;
+                $path = 'uploads/article/'.$no_pub;
+                FileHelper::createDirectory($path);
+                $model->file_cover->saveAs($path.'/'.$no_pub.'-cover.' . $model->file_cover->extension);
+                $model->file_cover = $path.'/'.$no_pub.'-cover.' . $model->file_cover->extension;
+            }
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -92,8 +104,19 @@ class PublicationController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $pub = $model;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->file_cover = UploadedFile::getInstance($model, 'file_cover');
+
+            if ($model->file_cover && $model->validate()) {
+                $no_pub = 'VOL'.$pub->vol.'-NO'.$pub->no.'-'.strtoupper(date('F', mktime(0, 0, 0, $pub->month_pub, 10))).'-'.$pub->years_pub;
+                $path = 'uploads/article/'.$no_pub;
+                FileHelper::createDirectory($path);
+                $model->file_cover->saveAs($path.'/'.$no_pub.'-cover.' . $model->file_cover->extension);
+                $model->file_cover = $path.'/'.$no_pub.'-cover.' . $model->file_cover->extension;
+            }
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
