@@ -77,6 +77,7 @@ class Publication extends \yii\db\ActiveRecord
     {
         return [
             [['vol', 'no', 'month_pub', 'years_pub', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['file_cover'],'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg'],
         ];
     }
 
@@ -91,6 +92,7 @@ class Publication extends \yii\db\ActiveRecord
             'no' => Yii::t('app', 'No'),
             'month_pub' => Yii::t('app', 'Month Publication'),
             'years_pub' => Yii::t('app', 'Years Publication'),
+            'file_cover' => Yii::t('app', 'Cover'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'created_by' => Yii::t('app', 'Created By'),

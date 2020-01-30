@@ -3,21 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<title><?php $title; ?></title>
-<?php 
-// date_default_timezone_set('Asia/Jakarta');
-// $dte = date();
-// $tgl = substr($min,5,2);
-// $bln = substr($min,8,2);
-// $thn = substr($min,0,4);
-// print_r($dte);
-
- ?>
-</head>
 <body>
 <div id="page1">
-<div id="watermark">    
-    <img id="logo" src="assets/img/usm.jpg">
-</div>
+<!-- <div id="watermark">    
+    <img id="logo" src="<?= $logo ?>">
+</div> -->
 <div id="container">    
 <br>
 <table align="center" cellspacing="1px" style=" text-align: center; font-size: 19px; ">
@@ -30,38 +20,38 @@
 </table>
 <br><br><br>
 <table border="" align="center" cellspacing="1px" style="width: 87%; text-align: center; font-size: 15px">
-<?php foreach ($mhs as $row): ?>
+
 	<tr>
 		<td style="width:19%; text-align: left;" >Nama</td>
 		<td style="width:1%">:</td>
-		<td style="width:45%; text-align: left;"><?php echo $row['nama']; ?></td>
+		<td style="width:45%; text-align: left;"><?= $profile->name; ?></td>
 		<td style="width:35%; text-align: left;"></td>
 	</tr>
 	<tr>
 		<td style="width:19%; text-align: left;">NIM</td>
 		<td style="width:1%">:</td>
-		<td style="width:45%; text-align: left;"><?php echo $row['nim']; ?></td>
+		<td style="width:45%; text-align: left;"><?= $jurnal->user->username; ?></td>
 		<td style="width:35%; text-align: left;"></td>
 	</tr>
 	<tr>
 		<td style="width:19%; text-align: left;">Judul Jurnal</td>
 		<td style="width:1%">:</td>
-		<td style="width:45%; text-align: left;" colspan="2"><?php echo $row['judul']; ?></td>
+		<td style="width:45%; text-align: left;" colspan="2"><?= $jurnal->judul; ?></td>
 	</tr>
 	<tr>
 		<td style="width:19%; text-align: left;" rowspan="2">Pembimbing</td>
 		<td style="width:1%">:</td>
-		<td style="width:45%; text-align: left;">1. <?php echo $row['pemb1']; ?></td>
+		<td style="width:45%; text-align: left;">1. <?= $jurnal->pembimbingOne->pembimbing; ?></td>
 		<td style="width:35%; text-align: left;"></td>
 	</tr>
 	<tr>
 		
 		<td style="width:1%">:</td>
 		<td style="width:45%; text-align: left;">2. <?php 
-		if($row['pembimbing_2'] == ''){
+		if(empty($jurnal->pembimbingTwo->pembimbing)){
 			echo ' - ';
 		}else{
-			echo $row['pembimbing'];
+			echo $jurnal->pembimbingTwo->pembimbing;
 		}
 		 ?></td>
 		 <td style="width:35%; text-align: left;"></td>
@@ -72,7 +62,7 @@
 		<td style="width:45%; text-align: left;"> Jurnal dan CD</td>
 		<td style="width:35%; text-align: left;"></td>
 	</tr>
-<?php endforeach; ?>
+
 
 	<tr>
 		<td ></td>
@@ -96,10 +86,10 @@
 		<td style="width:35%; height: 70px; text-align: center; " valign="bottom">( ___________________________ )</td>
 	</tr>
 	<tr>
-		<td>Upload Ke: <?php echo $row['upload_ke'];echo ' / '; echo $row['tgl_upload']; ?></td>
+		<td>Upload Ke: <?php echo $jurnal->upload_ke;echo ' / '; echo $jurnal->tgl_upload; ?></td>
 		<td></td>
 		<td colspan="1" align="center"></td>
-		<td style="width:35%; text-align: center;"><br>NIS : .............................................. </td>
+		<td style="width:35%; text-align: center;"><br>NIS : ....................................... </td>
 	</tr>
 </table>
 </div>
@@ -111,9 +101,9 @@
 
 
 <div id="page2">
-<div id="watermark2">    
-    <img id="logo" src="assets/img/usm.jpg">
-</div>
+<!-- <div id="watermark2">    
+    <img id="logo" src="<?= $logo ?>">
+</div> -->
 <div id="container">    
 <br>
 <table align="center" cellspacing="1px" style=" text-align: center; font-size: 19px; ">
@@ -126,38 +116,37 @@
 </table>
 <br><br><br>
 <table border="" align="center" cellspacing="1px" style="width: 87%; text-align: center; font-size: 15px">
-<?php foreach ($mhs as $row): ?>
 	<tr>
 		<td style="width:19%; text-align: left;" >Nama</td>
 		<td style="width:1%">:</td>
-		<td style="width:45%; text-align: left;"><?php echo $row['nama']; ?></td>
+		<td style="width:45%; text-align: left;"><?= $profile->name; ?></td>
 		<td style="width:35%; text-align: left;"></td>
 	</tr>
 	<tr>
 		<td style="width:19%; text-align: left;">NIM</td>
 		<td style="width:1%">:</td>
-		<td style="width:45%; text-align: left;"><?php echo $row['nim']; ?></td>
+		<td style="width:45%; text-align: left;"><?= $jurnal->user->username; ?></td>
 		<td style="width:35%; text-align: left;"></td>
 	</tr>
 	<tr>
 		<td style="width:19%; text-align: left;">Judul Jurnal</td>
 		<td style="width:1%">:</td>
-		<td style="width:45%; text-align: left;" colspan="2"><?php echo $row['judul']; ?></td>
+		<td style="width:45%; text-align: left;" colspan="2"><?= $jurnal->judul; ?></td>
 	</tr>
 	<tr>
 		<td style="width:19%; text-align: left;" rowspan="2">Pembimbing</td>
 		<td style="width:1%">:</td>
-		<td style="width:45%; text-align: left;">1. <?php echo $row['pemb1']; ?></td>
+		<td style="width:45%; text-align: left;">1. <?= $jurnal->pembimbingOne->pembimbing; ?></td>
 		<td style="width:35%; text-align: left;"></td>
 	</tr>
 	<tr>
 		
 		<td style="width:1%">:</td>
 		<td style="width:45%; text-align: left;">2. <?php 
-		if($row['pembimbing_2'] == ''){
+		if(empty($jurnal->pembimbingTwo->pembimbing)){
 			echo ' - ';
 		}else{
-			echo $row['pembimbing'];
+			echo $jurnal->pembimbingTwo->pembimbing;
 		}
 		 ?></td>
 		 <td style="width:35%; text-align: left;"></td>
@@ -168,7 +157,6 @@
 		<td style="width:45%; text-align: left;"> Jurnal dan CD</td>
 		<td style="width:35%; text-align: left;"></td>
 	</tr>
-<?php endforeach; ?>
 
 	<tr>
 		<td ></td>
@@ -192,10 +180,10 @@
 		<td style="width:35%; height: 70px; text-align: center; " valign="bottom">( ___________________________ )</td>
 	</tr>
 		<tr>
-		<td>Upload Ke: <?php echo $row['upload_ke'];echo ' / '; echo $row['tgl_upload']; ?></td>
+		<td>Upload Ke: <?php echo $jurnal->upload_ke;echo ' / '; echo $jurnal->tgl_upload; ?></td>
 		<td></td>
 		<td colspan="1" align="center"></td>
-		<td style="width:35%; text-align: center;"><br>NIS : .............................................. </td>
+		<td style="width:35%; text-align: center;"><br>NIS : ....................................... </td>
 	</tr>
 </table>
 </div>
@@ -229,8 +217,8 @@
 	    top:640px;
 	    left:300px;
 	    display:block;
-	    position: absolute;
-	    z-index:-1 !important;
+	    position: relative;
+	    z-index:-10 !important;
 	    opacity: 0.5;
 	}
 	img#logo{
@@ -238,7 +226,7 @@
 	    height: 150px;
 	}
 
-	}
+	
 	#page2{
 		margin-top: 30px;
 	}

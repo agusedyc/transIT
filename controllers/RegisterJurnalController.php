@@ -89,4 +89,29 @@ class RegisterJurnalController extends \yii\web\Controller
         ]);
     }
 
+    public function actionPrint()
+    {
+        $id = Yii::$app->user->id;
+        $profile = Profile::findOne($id);
+        $jurnal = Jurnal::find(['user_id'=>$id])->one(); 
+
+        $mpdf = new \Mpdf\Mpdf([
+            'format' => 'Legal',
+            'margin_left' => 4,
+            'margin_right' => 3,
+            'margin_top' => 2,
+            'margin_bottom' => 2,
+        ]);
+        $mpdf->SetWatermarkImage('uploads/assets/img/usm.jpg',0.1,'P',[0,50]);
+        $mpdf->showWatermarkImage = true;
+        $mpdf->WriteHTML($this->renderPartial('upload-validation', [
+                'user' => Yii::$app->user,
+                'profile' => $profile,
+                'jurnal' => $jurnal,
+                'logo' => 'uploads/assets/img/usm.jpg',
+        ]));
+        $mpdf->Output();
+        exit;
+    }
+
 }
