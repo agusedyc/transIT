@@ -3,12 +3,16 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\ContactForm;
+use app\models\LoginForm;
+use app\models\Publication;
+use app\models\Article;
+use app\models\searchs\ArticleSearch;
+use app\models\searchs\PublicationSearch;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\Response;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 
 class SiteController extends Controller
 {
@@ -134,5 +138,40 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionIssue()
+    {
+        // $publication = Publication::find()->all();
+        // echo '<pre>';
+        // print_r($publication);
+        // echo '</pre>';
+
+        $searchModel = new PublicationSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('issue', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionIssueView($id)
+    {
+        $searchModel = new ArticleSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere(['pub_id'=>$id]);
+        return $this->render('issue-view', [
+            'model' => Publication::findOne($id),
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionArticle($title)
+    {
+        return $this->render('article-view', [
+            'model' => Article::find()->where(['slug'=>$title])->one(),
+        ]);
     }
 }
