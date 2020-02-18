@@ -14,6 +14,7 @@ $this->title = 'Trans IT - Issue';
       <h3 class="box-title"><?= Html::a('Vol '.$data->vol.', No '.$data->no.'('.$data->years_pub.') : '.date('F', mktime(0, 0, 0, $data->month_pub, 10)).' '.$data->years_pub, ['issue']) ?></h3>
 
       <div class="box-tools pull-right">
+        <?= Html::a('<i class="fa fa-backward"></i> Back',['/site/issue'],['class'=>'btn btn-box-tool']) ?>
         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
         </button>
       </div>

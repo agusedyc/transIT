@@ -13,6 +13,7 @@ $this->title = 'Trans IT - Issue';
       <h3 class="box-title">Publication</h3>
 
       <div class="box-tools pull-right">
+        <?= Html::a('<i class="fa fa-backward"></i> Back',['/'],['class'=>'btn btn-box-tool']) ?>
         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
         </button>
       </div>
