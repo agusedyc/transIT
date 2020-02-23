@@ -4,10 +4,13 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Post;
+use app\models\UploadForm;
 use app\models\searchs\PostSearch;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use yii\web\Response;
+use yii\web\UploadedFile;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -66,13 +69,46 @@ class PostController extends Controller
     {
         $model = new Post();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->content = str_replace('<p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>', "", $model->content);
+            $uploadFile = UploadedFile::getInstance($model, 'image_featured');
+            if (!empty($uploadFile) && $uploadFile->size !== 0) {
+                $uploadFile->saveAs(Yii::getAlias('@web').'/uploads/content/'.$uploadFile->baseName.'.'.$uploadFile->extension);
+                $model->image_featured = 'uploads/featured/'.$uploadFile->name;
+            }
+            // }else{
+            //     $model->site_logo = $current_logo;
+            // }
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
         ]);
+    }
+
+    public function actionUpload() {
+        $base_path = Yii::getAlias('@app');
+        $web_path = Yii::getAlias('@web');
+        $model = new UploadForm();
+
+        if (Yii::$app->request->isPost) {
+            $model->file = UploadedFile::getInstanceByName('file');
+
+            if ($model->validate()) {
+                $model->file->saveAs($base_path . '/web/uploads/content/' . $model->file->baseName . '.' . $model->file->extension);
+            }
+        }
+
+        // Get file link
+        $res = [
+            'link' => $web_path . '/uploads/content/' . $model->file->baseName . '.' . $model->file->extension,
+        ];
+
+        // Response data
+        Yii::$app->response->format = Yii::$app->response->format = Response::FORMAT_JSON;
+        return $res;
     }
 
     /**

@@ -16,7 +16,32 @@ use yii\widgets\ActiveForm;
 
     <!-- <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?> -->
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <!-- <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?> -->
+
+    <?php echo froala\froalaeditor\FroalaEditorWidget::widget([
+        'model' => $model,
+        'attribute' => 'content',
+        'options' => [
+            // html attributes
+            'id'=>'content'
+        ],
+        'clientOptions' => [
+            'toolbarInline'=> false,
+            'height' => 600,
+            'theme' => 'royal',//optional: dark, red, gray, royal
+            // 'language' => 'en_gb' ,
+            'toolbarButtons' => ['fullscreen', 'bold', 'italic', 'underline', '|', 'paragraphFormat', 'insertImage'],
+            'imageUploadParam' => 'file',
+            'imageUploadURL' => \yii\helpers\Url::to(['post/upload']),
+            'imageUploadParams' => [
+                Yii::$app->request->csrfParam => Yii::$app->request->getCsrfToken(),
+            ],
+            'imageManagerDeleteParams' => [
+                Yii::$app->request->csrfParam => Yii::$app->request->getCsrfToken(),
+            ],
+        ],
+        'clientPlugins'=> ['fullscreen', 'paragraph_format', 'image']
+    ]); ?>
 
     <!-- <?= $form->field($model, 'created_at')->textInput() ?> -->
 
