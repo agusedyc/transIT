@@ -24,7 +24,8 @@
         "mdmsoft/yii2-autonumber": "~1.0",
         "yii2tech/html2pdf": "^1.0",
         "kartik-v/yii2-field-range": "*",
-        "mpdf/mpdf": "^8.0"
+        "mpdf/mpdf": "^8.0",
+        "froala/yii2-froala-editor": "^3.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
