@@ -3,11 +3,12 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Article;
 use app\models\ContactForm;
 use app\models\LoginForm;
 use app\models\Publication;
-use app\models\Article;
 use app\models\searchs\ArticleSearch;
+use app\models\searchs\PostSearch;
 use app\models\searchs\PublicationSearch;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -71,7 +72,15 @@ class SiteController extends Controller
     public function actionIndex()
     {
         if (Yii::$app->user->isGuest) {
-            return $this->render('index');    
+            $searchModel = new PostSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $dataProvider->setPagination(['pageSize' => 5]);
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+            // return $this->render('index');    
         }else{
             return $this->render('dashboard');
         }
