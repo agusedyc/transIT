@@ -26,7 +26,7 @@ $config = [
             // 'gii/*',
             // 'site/index',
             'site/*',
-            'debug/*',
+            // 'debug/*',
             // 'mimin/*', // only in dev mode
             // 'subject/*',
         ],
