@@ -30,7 +30,7 @@ use yii\widgets\ActiveForm;
             'height' => 600,
             'theme' => 'royal',//optional: dark, red, gray, royal
             // 'language' => 'en_gb' ,
-            'toolbarButtons' => ['fullscreen', 'bold', 'italic', 'underline','insertLink','|', 'paragraphFormat', 'insertImage'],
+            'toolbarButtons' => ['fullScreen','insertImage','insertLink', 'bold', 'italic', 'underline', 'paragraphStyle', 'paragraphFormat','alignRight','alignCenter','alignLeft','alignJustify','formatOL','formatUL','outdent', 'indent','table'],
             'imageUploadParam' => 'file',
             'imageUploadURL' => \yii\helpers\Url::to(['post/upload']),
             'imageUploadParams' => [
@@ -40,7 +40,7 @@ use yii\widgets\ActiveForm;
                 Yii::$app->request->csrfParam => Yii::$app->request->getCsrfToken(),
             ],
         ],
-        'clientPlugins'=> ['fullscreen', 'paragraph_format', 'image','link']
+        'clientPlugins'=> ['fullscreen', 'paragraph_format', 'image','link','align','table','lists']
     ]); ?>
 
     <!-- <?= $form->field($model, 'created_at')->textInput() ?> -->
