@@ -13,7 +13,7 @@ $bln = array('Januari', 'Febuari', 'Maret', 'April', 'Mei', 'Juni','Juli','Agust
 <div class="title">
 	<h3>LAPORAN JURNAL MAHASISWA</h3>
 	<h3>TRANS IT</h3>
-	<h4>Tanggal <?php echo date('d',strtotime($date_from)).'-'.$bln[date('j',strtotime($date_from))+1].'-'.date('Y',strtotime($date_from)).' s/d '.date('d',strtotime($date_to)).'-'.$bln[date('j',strtotime($date_to))+1].'-'.date('Y',strtotime($date_to)); ?></h4>
+	<h4>Tanggal <?php echo date('d',strtotime($date_from)).' '.$bln[date('j',strtotime($date_from))+1].' '.date('Y',strtotime($date_from)).' s/d '.date('d',strtotime($date_to)).' '.$bln[date('j',strtotime($date_to))+1].' '.date('Y',strtotime($date_to)); ?></h4>
 </div>
 <div class="logo">
 	<img id="logo" src="<?= $logo ?>">
@@ -70,9 +70,9 @@ $bln = array('Januari', 'Febuari', 'Maret', 'April', 'Mei', 'Juni','Juli','Agust
 		<tr id='white'>
 			<td id='white' colspan="2" valign="bottom">
 				<p>
-					Dicetak Oleh: <?php //echo ucfirst($user); echo ' ,Tgl '; echo date("d-m-Y"); ?>
+					Dicetak Oleh: <?php echo ucfirst($user);?>
 				</p>
-				<br><br>
+				<br><br><br>
 			</td>
 		</tr>
 	</table>

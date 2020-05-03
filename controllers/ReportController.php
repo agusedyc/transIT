@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Jurnal;
 use app\models\Pembimbing;
+use dektrium\user\models\User;
 use yii\helpers\ArrayHelper;
 
 class ReportController extends \yii\web\Controller
@@ -72,6 +73,7 @@ class ReportController extends \yii\web\Controller
                 'date_to' => $post['to_date'],
                 'report' => $reportPembimbing,
                 'logo' => 'uploads/assets/img/usm.jpg',
+                'user' => User::findOne(Yii::$app->user->id)->profile->name,
         ]));
         $mpdf->Output();
         exit;
@@ -106,6 +108,7 @@ class ReportController extends \yii\web\Controller
                 'date_to' => $post['to_date'],
                 'report' => $reportPembimbing,
                 'logo' => 'uploads/assets/img/usm.jpg',
+                'user' => User::findOne(Yii::$app->user->id)->profile->name,
         ]));
         $mpdf->Output();
         exit;
