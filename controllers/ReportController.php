@@ -68,7 +68,8 @@ class ReportController extends \yii\web\Controller
         // $mpdf->SetWatermarkImage('uploads/assets/img/usm.jpg',0.1,'P',[0,50]);
         // $mpdf->showWatermarkImage = true;
         $mpdf->WriteHTML($this->renderPartial('report-jurnal', [
-                // 'user' => Yii::$app->,
+                'date_from' => $post['from_date'],
+                'date_to' => $post['to_date'],
                 'report' => $reportPembimbing,
                 'logo' => 'uploads/assets/img/usm.jpg',
         ]));
@@ -90,12 +91,24 @@ class ReportController extends \yii\web\Controller
         ->where(['between','tgl_upload',date('Y-m-d H:i:s',strtotime($post['from_date'])),date('Y-m-d H:i:s',strtotime($post['to_date']))])
         ->all();
 
-        echo '<pre>';
-        print_r($post);
-        echo '<br>';
-        print_r($reportPembimbing);
-        // echo date('Y-m-d H:i:s',strtotime($post['from_date']));
-        echo '</pre>';
+        $mpdf = new \Mpdf\Mpdf([
+            'format' => 'Legal',
+            'orientation' => 'L',
+            'margin_left' => 4,
+            'margin_right' => 3,
+            'margin_top' => 2,
+            'margin_bottom' => 2,
+        ]);
+        // $mpdf->SetWatermarkImage('uploads/assets/img/usm.jpg',0.1,'P',[0,50]);
+        // $mpdf->showWatermarkImage = true;
+        $mpdf->WriteHTML($this->renderPartial('report-jurnal', [
+                'date_from' => $post['from_date'],
+                'date_to' => $post['to_date'],
+                'report' => $reportPembimbing,
+                'logo' => 'uploads/assets/img/usm.jpg',
+        ]));
+        $mpdf->Output();
+        exit;
     }
 
     public function getMonth()
