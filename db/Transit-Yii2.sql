@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mariadb
--- Generation Time: May 02, 2020 at 11:00 AM
+-- Generation Time: May 03, 2020 at 04:19 AM
 -- Server version: 10.3.18-MariaDB-1:10.3.18+maria~bionic
 -- PHP Version: 7.2.22
 
@@ -118,6 +118,7 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 ('/mimin/route/*', 2, NULL, NULL, NULL, 1576937643, 1576937643),
 ('/mimin/user/*', 2, NULL, NULL, NULL, 1576937644, 1576937644),
 ('/pembimbing/*', 2, NULL, NULL, NULL, 1580089450, 1580089450),
+('/post/*', 2, NULL, NULL, NULL, 1588469852, 1588469852),
 ('/publication/*', 2, NULL, NULL, NULL, 1580090035, 1580090035),
 ('/register-jurnal/*', 2, NULL, NULL, NULL, 1578752455, 1578752455),
 ('/report/*', 2, NULL, NULL, NULL, 1580216952, 1580216952),
@@ -132,7 +133,7 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 ('/user/settings/*', 2, NULL, NULL, NULL, 1576937653, 1576937653),
 ('/user/settings/account', 2, NULL, NULL, NULL, 1579615765, 1579615765),
 ('/user/settings/profile', 2, NULL, NULL, NULL, 1579615762, 1579615762),
-('Administrator', 1, NULL, NULL, NULL, 1575720751, 1580099654),
+('Administrator', 1, NULL, NULL, NULL, 1575720751, 1588469865),
 ('Mahasiswa', 1, NULL, NULL, NULL, 1575720787, 1579616452),
 ('Pembimbing', 1, NULL, NULL, NULL, 1575720814, 1575725833),
 ('Sysadmin', 1, NULL, NULL, NULL, 1575252260, 1575252337);
@@ -160,6 +161,7 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 ('Administrator', '/mimin/route/*'),
 ('Administrator', '/mimin/user/*'),
 ('Administrator', '/pembimbing/*'),
+('Administrator', '/post/*'),
 ('Administrator', '/publication/*'),
 ('Administrator', '/report/*'),
 ('Administrator', '/site/*'),
@@ -319,6 +321,13 @@ CREATE TABLE `post` (
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `post`
+--
+
+INSERT INTO `post` (`id`, `title`, `slug`, `content`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
+(1, 'Alur Pengumpulan Jurnal Transit', 'alur-pengumpulan-jurnal-transit', '<p><br></p><p style=\"margin-left: 140px;\"><img src=\"/uploads/content/flowchart-jurnal.jpg\" style=\"width: 945px;\" class=\"fr-fic fr-dii\"></p><p style=\"margin-left: 160px;\">1. Silahkan Download Template <a href=\"http://transit.ftik.usm.ac.id\" rel=\"noopener noreferrer\" target=\"_blank\">Disini</a></p>', 1588472000, 1588472742, 6, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -419,6 +428,8 @@ INSERT INTO `route` (`name`, `alias`, `type`, `status`) VALUES
 ('/gii/default/index', 'index', 'gii/default', 1),
 ('/gii/default/preview', 'preview', 'gii/default', 1),
 ('/gii/default/view', 'view', 'gii/default', 1),
+('/issue/*', '*', 'issue', 1),
+('/issue/index', 'index', 'issue', 1),
 ('/jurnal/*', '*', 'jurnal', 1),
 ('/jurnal/create', 'create', 'jurnal', 1),
 ('/jurnal/delete', 'delete', 'jurnal', 1),
@@ -452,6 +463,13 @@ INSERT INTO `route` (`name`, `alias`, `type`, `status`) VALUES
 ('/pembimbing/index', 'index', 'pembimbing', 1),
 ('/pembimbing/update', 'update', 'pembimbing', 1),
 ('/pembimbing/view', 'view', 'pembimbing', 1),
+('/post/*', '*', 'post', 1),
+('/post/create', 'create', 'post', 1),
+('/post/delete', 'delete', 'post', 1),
+('/post/index', 'index', 'post', 1),
+('/post/update', 'update', 'post', 1),
+('/post/upload', 'upload', 'post', 1),
+('/post/view', 'view', 'post', 1),
 ('/publication/*', '*', 'publication', 1),
 ('/publication/create', 'create', 'publication', 1),
 ('/publication/delete', 'delete', 'publication', 1),
@@ -461,15 +479,20 @@ INSERT INTO `route` (`name`, `alias`, `type`, `status`) VALUES
 ('/register-jurnal/*', '*', 'register-jurnal', 1),
 ('/register-jurnal/create', 'create', 'register-jurnal', 1),
 ('/register-jurnal/index', 'index', 'register-jurnal', 1),
+('/register-jurnal/print', 'print', 'register-jurnal', 1),
 ('/register-jurnal/upload', 'upload', 'register-jurnal', 1),
 ('/report/*', '*', 'report', 1),
+('/report/date-range', 'date-range', 'report', 1),
 ('/report/index', 'index', 'report', 1),
 ('/site/*', '*', 'site', 1),
 ('/site/about', 'about', 'site', 1),
+('/site/article', 'article', 'site', 1),
 ('/site/captcha', 'captcha', 'site', 1),
 ('/site/contact', 'contact', 'site', 1),
 ('/site/error', 'error', 'site', 1),
 ('/site/index', 'index', 'site', 1),
+('/site/issue', 'issue', 'site', 1),
+('/site/issue-view', 'issue-view', 'site', 1),
 ('/site/login', 'login', 'site', 1),
 ('/site/logout', 'logout', 'site', 1),
 ('/user/*', '*', 'user', 1),
@@ -566,9 +589,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `password_hash`, `auth_key`, `confirmed_at`, `unconfirmed_email`, `blocked_at`, `registration_ip`, `created_at`, `updated_at`, `flags`, `last_login_at`) VALUES
-(6, 'sysadmintransit', 'aguseasdasdyc@gmail.com', '$2y$10$tCuc/jO7/hlVciuw8Ve8R.g0IKMIDP8F2JrSKjqwqqCYUv0dci3SG', 'tsD6aTfCdBpgypkzj9aVK-C-dIlC6cAD', 1575250443, NULL, NULL, '172.18.0.1', 1575250443, 1575250443, 0, 1588409985),
+(6, 'sysadmintransit', 'aguseasdasdyc@gmail.com', '$2y$10$tCuc/jO7/hlVciuw8Ve8R.g0IKMIDP8F2JrSKjqwqqCYUv0dci3SG', 'tsD6aTfCdBpgypkzj9aVK-C-dIlC6cAD', 1575250443, NULL, NULL, '172.18.0.1', 1575250443, 1575250443, 0, 1588472651),
 (12, 'agusedyc', 'edyaguasdsc@gmail.com', '$2y$10$9LFKCQef3dCfqfhit/d7LOIvBRxjZRDYBKroqJlJePyVqbS4/6oTK', 'gCQRD8bPIkVlNpYzf66PrAbUdzeFFWb7', 1578753817, NULL, NULL, '172.18.0.1', 1578753699, 1578753699, 0, NULL),
-(21, 'G.211.13.0047', 'edyagusc@gmail.com', '$2y$10$M8Ot.hZiquLHYkzjfk/V0edcc4HQpIZeKI366dMQRGpw08xdfVufq', 'xa0c6n2bFxHj23djc0pYQVYM-MupePHf', 1579614790, NULL, NULL, '172.18.0.1', 1579614767, 1579614767, 0, 1580305854),
+(21, 'G.211.13.0047', 'edyagusc@gmail.com', '$2y$10$M8Ot.hZiquLHYkzjfk/V0edcc4HQpIZeKI366dMQRGpw08xdfVufq', 'xa0c6n2bFxHj23djc0pYQVYM-MupePHf', 1579614790, NULL, NULL, '172.18.0.1', 1579614767, 1579614767, 0, 1588472226),
 (22, 'sysadminapp', 'transitftikusm@gmail.com', '$2y$10$vqXaiCfDth6m2ujCA09NROAGiKOoUl1m.TbuiApVE0qdCkvrmsmYW', 'dEiHFVXjbjEaTa1nN-2VOnJ3eRXFWloz', 1580088373, NULL, NULL, '172.18.0.1', 1580088373, 1580088373, 0, 1581230519);
 
 --
@@ -703,6 +726,12 @@ ALTER TABLE `jurnal`
 --
 ALTER TABLE `pembimbing`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `post`
+--
+ALTER TABLE `post`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `publication`
