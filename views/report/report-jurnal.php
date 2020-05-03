@@ -59,7 +59,7 @@ $bln = array('Januari', 'Febuari', 'Maret', 'April', 'Mei', 'Juni','Juli','Agust
 		    <td id='white' rowspan="2"></td>
 		    <td id='white' rowspan="2" colspan="2" align="center"> <br><br><br>
 		    	<p>
-						Semarang, <?php echo date("d-m-Y"); ?>
+						Semarang, <?php echo date('d').' '.$bln[date('j')+1].' '.date('Y'); ?>
 					</p>
 					<br><br><br><br>
 					<p>
