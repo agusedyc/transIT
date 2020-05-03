@@ -53,6 +53,12 @@ $this->params['breadcrumbs'][] = $this->title;
             //     'value' => date('F', mktime(0, 0, 0, $model->month_pub, 10)),
             // ],
             // 'years_pub',
+            [
+                'label' => 'Cover Publikasi',
+                'attribute' => 'file_cover',
+                'format' => 'raw',
+                'value' => Html::img('@web/'.$model->file_cover, ['width' => '310','height' => '439']),
+            ],
             'created_at:datetime',
             'updated_at:datetime',
             // 'created_by',

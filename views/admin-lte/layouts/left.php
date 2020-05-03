@@ -41,6 +41,7 @@
                         ['label' => 'Pembimbing', 'icon' => 'users', 'url' => ['/pembimbing/index'],],
                         ['label' => 'Jurnal', 'icon' => 'file', 'url' => ['/jurnal/index'],],
                         ['label' => 'Publikasi', 'icon' => 'files-o', 'url' => ['/publication/index'],],
+                        ['label' => 'Post', 'icon' => 'share', 'url' => ['/post/index'],],
                     ],
                 ],
                 ['label' => 'Report','icon' => 'book','url' => ['/report/index']],
