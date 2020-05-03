@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php $form = ActiveForm::begin([
                     // 'id' => 'profile-form',
                     // 'method' => 'post',
-                    // 'action' => ['register-jurnal/index'],
+                    'action' => ['report/report-tanggal'],
                     'options' => ['class' => 'form-horizontal'],
                     'fieldConfig' => [
                         'template' => "{label}\n<div class=\"col-lg-9\">{input}</div>\n<div class=\"col-sm-offset-3 col-lg-9\">{error}\n{hint}</div>",
@@ -70,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 
                 <div class="form-group">
                     <div class="col-lg-offset-3 col-lg-9">
-                        <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'btn btn-block btn-success']) ?>
+                        <?= Html::submitButton(Yii::t('user', 'Show'), ['class' => 'btn btn-block btn-success']) ?>
                         <br>
                     </div>
                 </div>
