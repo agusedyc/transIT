@@ -13,7 +13,7 @@ $bln = array('Januari', 'Febuari', 'Maret', 'April', 'Mei', 'Juni','Juli','Agust
 <div class="title">
 	<h3>LAPORAN JURNAL MAHASISWA</h3>
 	<h3>TRANS IT</h3>
-	<h4>Tanggal <?php echo date('d',strtotime($date_from)).' '.$bln[date('j',strtotime($date_from))+1].' '.date('Y',strtotime($date_from)).' s/d '.date('d',strtotime($date_to)).' '.$bln[date('j',strtotime($date_to))+1].' '.date('Y',strtotime($date_to)); ?></h4>
+	<h4>Tanggal <?php echo date('d',strtotime($date_from)).' '.$bln[date('n',strtotime($date_from))-1].' '.date('Y',strtotime($date_from)).' s/d '.date('d',strtotime($date_to)).' '.$bln[date('n',strtotime($date_to))-1].' '.date('Y',strtotime($date_to)); ?></h4>
 </div>
 <div class="logo">
 	<img id="logo" src="<?= $logo ?>">
@@ -59,7 +59,7 @@ $bln = array('Januari', 'Febuari', 'Maret', 'April', 'Mei', 'Juni','Juli','Agust
 		    <td id='white' rowspan="2"></td>
 		    <td id='white' rowspan="2" colspan="2" align="center"> <br><br><br>
 		    	<p>
-						Semarang, <?php echo date('d').' '.$bln[date('j')+1].' '.date('Y'); ?>
+						Semarang, <?php echo date('d').' '.$bln[date('n')-1].' '.date('Y'); ?>
 					</p>
 					<br><br><br><br>
 					<p>
