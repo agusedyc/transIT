@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'pembimbing_1',
                 'format' => 'raw',
                 'value' => function($data){
-                    return $data->pembimbingOne->pembimbing;
+                    return (isset($data->pembimbing_1)) ? $data->pembimbingOne->pembimbing : null;
                 },
             ],
             // 'pembimbing_2',
