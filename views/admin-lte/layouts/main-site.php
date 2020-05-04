@@ -23,9 +23,9 @@ use yii\helpers\Html;
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head>
-    <body class="hold-transition <?= \dmstr\helpers\AdminLteHelper::skinClass() ?> sidebar-collapse">
+    <body class="<?= \dmstr\helpers\AdminLteHelper::skinClass() ?> layout-top-nav" style="height: auto; min-height: 100%;" data-gr-c-s-loaded="true">
     <?php $this->beginBody() ?>
-    <div class="wrapper">
+    <div class="wrapper" style="height: auto; min-height: 100%;">
 
         <?= $this->render(
             'header-site.php',

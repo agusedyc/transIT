@@ -21,10 +21,10 @@ class RegisterJurnalController extends \yii\web\Controller
     public function actionIndex()
     {
     	$id = Yii::$app->user->id;
-    	$profile = Profile::findOne($id);
+    	$profile = Profile::find()->where(['user_id'=>$id])->one();
     	$list_pembimbing = ArrayHelper::map(Pembimbing::find()->asArray()->all(), 'id', 'pembimbing'); 
-    	$jurnal = Jurnal::find(['user_id'=>$id])->one(); 
-        // print_r(empty($jurnal));
+    	$jurnal = Jurnal::find()->where(['user_id'=>$id])->one(); 
+
     	if (empty($jurnal)) {
             $jurnal_create = new Jurnal;
     		$jurnal_create->user_id = $id;
@@ -32,18 +32,16 @@ class RegisterJurnalController extends \yii\web\Controller
     	}
         $request = Yii::$app->request->post();    	
         if (!empty($request)) {
-            // echo '<pre>';
-            // print_r($request);
-            // echo '</pre>';
             $jurnal->load($request);
             $jurnal->pembimbing_1 = $request['pembimbing_1'];
             $jurnal->pembimbing_2 = $request['pembimbing_2'];    
             $jurnal->save();
-            $profile->load($request);            
+            $profile->load($request);
+            $profile->nim = User::find()->where(['id'=>$id])->one()->username;
             $profile->save(false);
             Yii::$app->session->setFlash('success', 'Data tersimpan');
         }
-
+        
         return $this->render('index',[
             'profile' => $profile,
             'jurnal' => $jurnal,
@@ -56,18 +54,12 @@ class RegisterJurnalController extends \yii\web\Controller
     public function actionUpload()
     {
         $id = Yii::$app->user->id;
-        $profile = Profile::findOne($id);
+        $profile = Profile::find()->where(['user_id'=>$id])->one(); ;
         $list_pembimbing = ArrayHelper::map(Pembimbing::find()->asArray()->all(), 'id', 'pembimbing'); 
-        $jurnal = Jurnal::find(['user_id'=>$id])->one(); 
-        // $request = Yii::$app->request->post();      
+        $jurnal = Jurnal::find()->where(['user_id'=>$id])->one();
+        
         if (Yii::$app->request->post()) {
             $jurnal->jurnal = UploadedFile::getInstance($jurnal, 'jurnal');
-            // echo '<pre>';
-            // // print_r($request);
-            // echo '<br>';
-            // print_r($jurnal->jurnal);
-            // echo '</pre>';
-        // if (!is_null($jurnal->jurnal)) {
             if ($jurnal->jurnal && $jurnal->validate()) {
                 $path = 'uploads/pre-journal/'.$jurnal->user->username;
                 FileHelper::createDirectory($path);            
@@ -87,6 +79,31 @@ class RegisterJurnalController extends \yii\web\Controller
             'jurnal' => $jurnal,
             'list_pembimbing' => $list_pembimbing,
         ]);
+    }
+
+    public function actionPrint()
+    {
+        $id = Yii::$app->user->id;
+        $profile = Profile::findOne($id);
+        $jurnal = Jurnal::find()->where(['user_id'=>$id])->one(); 
+
+        $mpdf = new \Mpdf\Mpdf([
+            'format' => 'Legal',
+            'margin_left' => 4,
+            'margin_right' => 3,
+            'margin_top' => 2,
+            'margin_bottom' => 2,
+        ]);
+        $mpdf->SetWatermarkImage('uploads/assets/img/usm.jpg',0.1,'P',[0,50]);
+        $mpdf->showWatermarkImage = true;
+        $mpdf->WriteHTML($this->renderPartial('upload-validation', [
+                'user' => Yii::$app->user,
+                'profile' => $profile,
+                'jurnal' => $jurnal,
+                'logo' => 'uploads/assets/img/usm.jpg',
+        ]));
+        $mpdf->Output();
+        exit;
     }
 
 }
