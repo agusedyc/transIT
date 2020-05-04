@@ -111,7 +111,7 @@ $config = [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',
                 'username' => 'transitftikusm@gmail.com',
-                'password' => 'transitftikusm123!',
+                'password' => 'Tr4n51tft1ku5m123!',
                 'port' => '587',
                 'encryption' => 'tls',
             ],
