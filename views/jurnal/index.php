@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'contentOptions' => ['class' => 'text-wrap'],
                 'format' => 'raw',
                 'value' => function($data){
-                    return $data->pembimbingOne->pembimbing;
+                    return (isset($data->pembimbing_1)) ? $data->pembimbingOne->pembimbing : null;
                 },
             ],
             [
