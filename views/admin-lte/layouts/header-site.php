@@ -20,9 +20,9 @@ use yii\helpers\Html;
 
             <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
               <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Achive</a></li>
+                <li><?= Html::a('Home',['/']) ?></li>
+                <li><?= Html::a('About',['/site/about']) ?></li>
+                <li><?= Html::a('Archive',['/site/issue']) ?></li>
                 <!-- <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
