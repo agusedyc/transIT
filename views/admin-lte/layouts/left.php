@@ -41,8 +41,10 @@
                         ['label' => 'Pembimbing', 'icon' => 'users', 'url' => ['/pembimbing/index'],],
                         ['label' => 'Jurnal', 'icon' => 'file', 'url' => ['/jurnal/index'],],
                         ['label' => 'Publikasi', 'icon' => 'files-o', 'url' => ['/publication/index'],],
+                        ['label' => 'Post', 'icon' => 'share', 'url' => ['/post/index'],],
                     ],
                 ],
+                ['label' => 'Report','icon' => 'book','url' => ['/report/index']],
                 ['label' => 'Pengajuan Jurnal','icon' => 'book','url' => '#','items' => [
                         ['label' => 'Registrasi Jurnal', 'icon' => 'files', 'url' => ['/register-jurnal/index'],],
                         // ['label' => 'Upload Jurnal', 'icon' => 'files', 'url' => ['/register-jurnal/upload'],],
