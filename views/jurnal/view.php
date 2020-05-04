@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Jurnal */
 
-$this->title = $model->id;
+$this->title = $model->user->profile->name.'('.$model->user->username.')';
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Jurnals'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -30,24 +30,64 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'user_id',
+            // 'id',
+            // 'user_id',
             'judul',
-            'jurnal',
+            // 'jurnal',
             'abstrak:ntext',
+            [
+                'label' => 'Document',
+                'attribute' => 'jurnal',
+                'format' => 'raw',
+                'value' => function($data){
+                    return '<iframe src="https://docs.google.com/viewer?url='.Yii::$app->request->hostInfo.'/'.$data->jurnal.'&embedded=true" style="width:95%; height:500%;" frameborder="0"></iframe>';
+                },
+            ],
             'upload_ke',
             'tgl_upload',
-            'pembimbing_1',
-            'pembimbing_2',
+            // 'pembimbing_1',
+            [
+                'label' => 'Pembimbing 1',
+                'attribute' => 'pembimbing_1',
+                'format' => 'raw',
+                'value' => function($data){
+                    return (isset($data->pembimbing_1)) ? $data->pembimbingOne->pembimbing : null;
+                },
+            ],
+            // 'pembimbing_2',
+            [
+                'label' => 'Pembimbing 2',
+                'attribute' => 'pembimbing_2',
+                'format' => 'raw',
+                'value' => function($data){
+                    return (isset($data->pembimbing_2)) ? $data->pembimbingTwo->pembimbing : null;
+                },
+            ],
             'nourutjurnal',
             'nojurnal',
             'vol',
             'tgl_jurnal',
-            'created_by',
-            'updated_by',
-            'created_at',
-            'updated_at',
+            [
+                'label' => 'Created By',
+                'attribute' => 'created_by',
+                'format' => 'raw',
+                'value' => function($data){
+                    return $data->user->profile->name;
+                },
+            ],
+            [
+                'label' => 'Updated By',
+                'attribute' => 'updated_by',
+                'format' => 'raw',
+                'value' => function($data){
+                    return $data->user->profile->name;
+                },
+            ],
+            // 'created_by',
+            // 'updated_by',
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
 
-</div>
+</div>  

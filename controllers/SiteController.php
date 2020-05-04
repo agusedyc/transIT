@@ -179,8 +179,11 @@ class SiteController extends Controller
 
     public function actionArticle($title)
     {
+        $model = Article::find()->where(['slug'=>$title])->one();
+        $model->viewed += 1;
+        $model->save(false);  
         return $this->render('article-view', [
-            'model' => Article::find()->where(['slug'=>$title])->one(),
+            'model' => $model,
         ]);
     }
 }
