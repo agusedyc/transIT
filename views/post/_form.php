@@ -1,5 +1,6 @@
 <?php
 
+use hscstudio\mimin\components\Mimin;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -53,6 +54,7 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= ((Mimin::checkRoute($this->context->id.'/index',true))) ? Html::a(Yii::t('app', 'Back'), ['index'], ['class' => 'btn btn-warning']) : null ?>
     </div>
 
     <?php ActiveForm::end(); ?>
