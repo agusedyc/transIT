@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mariadb
--- Generation Time: May 03, 2020 at 04:19 AM
+-- Generation Time: May 08, 2020 at 12:25 PM
 -- Server version: 10.3.18-MariaDB-1:10.3.18+maria~bionic
 -- PHP Version: 7.2.22
 
@@ -51,9 +51,9 @@ CREATE TABLE `article` (
 --
 
 INSERT INTO `article` (`id`, `pub_id`, `title`, `slug`, `author`, `abstract`, `keywords`, `document`, `issn`, `doi`, `viewed`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
-(2, 2, 'Test Update 23', 'test-update-23', 'TEst Updateeee', 'Update Coba Update LAgi', 'asd', 'uploads/article/VOL12-NO1-MARCH-2019/Scan_0002.pdf', 'asd', 'asda', NULL, 1580110054, 1580134933, 6, 6),
-(3, 2, 'Test 3 update file2', 'test-3-update-file2', 'Author 3asd', 'Abstract 3asda', 'Key 36', 'uploads/article/VOL12-NO1-MARCH-2019/Doc1.docx', 'asdas', 'asd', NULL, 1580110892, 1580134894, 6, 6),
-(4, 3, 'Title As Slugable', 'title-as-slugable', 'asd', 'asd', 'sdaf', 'uploads/article/VOL12-NO2-APRIL-2019/Doc1.docx', 'asd', 'asd', NULL, 1580134764, 1580134862, 6, 6);
+(2, 2, 'Test Update 23', 'test-update-23', 'TEst Updateeee', 'Update Coba Update LAgi', 'asd', 'uploads/article/VOL12-NO1-MARCH-2019/Scan_0002.pdf', 'asd', 'asda', 9, 1580110054, 1588569172, 6, NULL),
+(3, 2, 'Test 3 update file2', 'test-3-update-file2', 'Author 3asd', 'Abstract 3asda', 'Key 36', 'uploads/article/VOL12-NO1-MARCH-2019/Doc1.docx', 'asdas', 'asd', 21, 1580110892, 1588569381, 6, NULL),
+(4, 3, 'Title As Slugable', 'title-as-slugable', 'asd', 'asd', 'sdaf', 'uploads/article/VOL12-NO2-APRIL-2019/Doc1.docx', 'asd', 'asd', 7, 1580134764, 1588568995, 6, NULL);
 
 -- --------------------------------------------------------
 
@@ -85,6 +85,7 @@ INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 ('Mahasiswa', '19', 1579608585),
 ('Mahasiswa', '20', 1579614378),
 ('Mahasiswa', '21', 1579614771),
+('Mahasiswa', '23', 1588557518),
 ('Mahasiswa', '5', 1578752498),
 ('Mahasiswa', '9', 1575732084),
 ('Sysadmin', '22', 1580089191);
@@ -113,6 +114,10 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 ('/*', 2, NULL, NULL, NULL, 1575252332, 1575252332),
 ('/article/*', 2, NULL, NULL, NULL, 1580099648, 1580099648),
 ('/jurnal/*', 2, NULL, NULL, NULL, 1579616422, 1579616422),
+('/jurnal/create', 2, NULL, NULL, NULL, 1588923227, 1588923227),
+('/jurnal/index', 2, NULL, NULL, NULL, 1588923225, 1588923225),
+('/jurnal/update', 2, NULL, NULL, NULL, 1588923230, 1588923230),
+('/jurnal/view', 2, NULL, NULL, NULL, 1588923232, 1588923232),
 ('/mimin/*', 2, NULL, NULL, NULL, 1576937642, 1576937642),
 ('/mimin/role/*', 2, NULL, NULL, NULL, 1576937642, 1576937642),
 ('/mimin/route/*', 2, NULL, NULL, NULL, 1576937643, 1576937643),
@@ -133,7 +138,7 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 ('/user/settings/*', 2, NULL, NULL, NULL, 1576937653, 1576937653),
 ('/user/settings/account', 2, NULL, NULL, NULL, 1579615765, 1579615765),
 ('/user/settings/profile', 2, NULL, NULL, NULL, 1579615762, 1579615762),
-('Administrator', 1, NULL, NULL, NULL, 1575720751, 1588469865),
+('Administrator', 1, NULL, NULL, NULL, 1575720751, 1588937577),
 ('Mahasiswa', 1, NULL, NULL, NULL, 1575720787, 1579616452),
 ('Pembimbing', 1, NULL, NULL, NULL, 1575720814, 1575725833),
 ('Sysadmin', 1, NULL, NULL, NULL, 1575252260, 1575252337);
@@ -155,10 +160,10 @@ CREATE TABLE `auth_item_child` (
 
 INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 ('Administrator', '/article/*'),
-('Administrator', '/jurnal/*'),
-('Administrator', '/mimin/*'),
-('Administrator', '/mimin/role/*'),
-('Administrator', '/mimin/route/*'),
+('Administrator', '/jurnal/create'),
+('Administrator', '/jurnal/index'),
+('Administrator', '/jurnal/update'),
+('Administrator', '/jurnal/view'),
 ('Administrator', '/mimin/user/*'),
 ('Administrator', '/pembimbing/*'),
 ('Administrator', '/post/*'),
@@ -243,7 +248,8 @@ CREATE TABLE `jurnal` (
 --
 
 INSERT INTO `jurnal` (`id`, `user_id`, `judul`, `jurnal`, `abstrak`, `upload_ke`, `tgl_upload`, `pembimbing_1`, `pembimbing_2`, `nourutjurnal`, `nojurnal`, `vol`, `tgl_jurnal`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(2, 21, 'RANCANG BANGUN ADAPTIVE LIGHTING MENGGUNAKAN ARDUINO DENGAN KONTROL ANDROID', 'uploads/pre-journal/G.211.13.0047/Doc1.docx', 'In the daily life of each person can not be separated from light to perform various activities in the room But the light in the room should be customized to the needs of each activity to avoid wasting electricity For that we need to save the energy of lighting system Usually the setting of the lighting use on-off method, where the lamps only work in two conditions, there are the lamps will on or off The setting of lighting with on-off method only work in room conditions, dark or bright without minding contribution of the light from the outside It caused the energy being? waste and not efficient. From that consideration, the writer create the lighting system room so the light can adjust the needs of the lighting according to the desired light intensity of the room The lamps will dim and or get brighter when the light sensor (LDR) detect the light in the room so that it makes the lighting of the lamp can be the same as we wanted. Arduino Uno R3 used as a control device with an Ethernet shield as communication media between smartphones and microcontrollers. The purpose of this research is to build an efficient lighting control system practical, according to the needs and equipped with the optimization of the lighting control based on efficiency and standard of room lightning SNI 03- 197-20 0. This system was designed practically that controlled remotely using a smartphone android device With created this system the writer hopes can save the energy of electricity and can meet the comfort factor and health of human vision on the lighting of the room.\r\n\r\n \r\nKeywords: The lighting system the light sensor (LDR), Arduino Uno R3, Android', 16, '2020-01-26 22:04:27', 1, NULL, '20200010', NULL, NULL, NULL, 21, 21, 1579652468, 1580054326);
+(2, 21, 'RANCANG BANGUN ADAPTIVE LIGHTING MENGGUNAKAN ARDUINO DENGAN KONTROL ANDROID', 'uploads/pre-journal/G.211.13.0047/Doc1.docx', 'In the daily life of each person can not be separated from light to perform various activities in the room But the light in the room should be customized to the needs of each activity to avoid wasting electricity For that we need to save the energy of lighting system Usually the setting of the lighting use on-off method, where the lamps only work in two conditions, there are the lamps will on or off The setting of lighting with on-off method only work in room conditions, dark or bright without minding contribution of the light from the outside It caused the energy being? waste and not efficient. From that consideration, the writer create the lighting system room so the light can adjust the needs of the lighting according to the desired light intensity of the room The lamps will dim and or get brighter when the light sensor (LDR) detect the light in the room so that it makes the lighting of the lamp can be the same as we wanted. Arduino Uno R3 used as a control device with an Ethernet shield as communication media between smartphones and microcontrollers. The purpose of this research is to build an efficient lighting control system practical, according to the needs and equipped with the optimization of the lighting control based on efficiency and standard of room lightning SNI 03- 197-20 0. This system was designed practically that controlled remotely using a smartphone android device With created this system the writer hopes can save the energy of electricity and can meet the comfort factor and health of human vision on the lighting of the room.\r\n\r\n \r\nKeywords: The lighting system the light sensor (LDR), Arduino Uno R3, Android', 16, '2020-01-26 22:04:27', 1, NULL, '20200010', NULL, NULL, NULL, 21, 21, 1579652468, 1588940310),
+(3, 23, 'Penyiramana Tanamana Otomatis', NULL, 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 0, NULL, 2, NULL, '00000000', NULL, NULL, NULL, 23, 23, 1588558202, 1588558807);
 
 -- --------------------------------------------------------
 
@@ -326,7 +332,7 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`id`, `title`, `slug`, `content`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
-(1, 'Alur Pengumpulan Jurnal Transit', 'alur-pengumpulan-jurnal-transit', '<p><br></p><p style=\"margin-left: 140px;\"><img src=\"/uploads/content/flowchart-jurnal.jpg\" style=\"width: 945px;\" class=\"fr-fic fr-dii\"></p><p style=\"margin-left: 160px;\">1. Silahkan Download Template <a href=\"http://transit.ftik.usm.ac.id\" rel=\"noopener noreferrer\" target=\"_blank\">Disini</a></p>', 1588472000, 1588472742, 6, 6);
+(1, 'Alur Pengumpulan Jurnal Transit', 'alur-pengumpulan-jurnal-transit', '<p><br></p><p style=\"margin-left: 140px;\"><img src=\"/uploads/content/flowchart-jurnal.jpg\" style=\"width: 945px;\" class=\"fr-fic fr-dii\"></p><ol><li>Silahkan Download Template <a href=\"http://transit.ftik.usm.ac.id\" rel=\"noopener noreferrer\" target=\"_blank\">Disini</a></li></ol>', 1588472000, 1588482402, 6, 6);
 
 -- --------------------------------------------------------
 
@@ -342,6 +348,7 @@ CREATE TABLE `profile` (
   `gravatar_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `gravatar_id` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `location` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
   `website` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `bio` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `timezone` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL
@@ -351,11 +358,12 @@ CREATE TABLE `profile` (
 -- Dumping data for table `profile`
 --
 
-INSERT INTO `profile` (`user_id`, `name`, `nim`, `public_email`, `gravatar_email`, `gravatar_id`, `location`, `website`, `bio`, `timezone`) VALUES
-(6, 'System Administrator', 'G.211.13.0047', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '', '', '', 'Pacific/Apia'),
-(12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(21, 'Agus Edy C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(22, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `profile` (`user_id`, `name`, `nim`, `public_email`, `gravatar_email`, `gravatar_id`, `location`, `phone`, `website`, `bio`, `timezone`) VALUES
+(6, 'System Administrator', 'G.211.13.0047', '', '', 'd41d8cd98f00b204e9800998ecf8427e', '', NULL, '', '', 'Pacific/Apia'),
+(12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(21, 'Agus Edy C', 'G.211.13.0047', NULL, NULL, NULL, NULL, '085740930517', NULL, NULL, NULL),
+(22, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(23, 'Aldi Hadar Novianto', 'G.212.13.0047', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -589,10 +597,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `password_hash`, `auth_key`, `confirmed_at`, `unconfirmed_email`, `blocked_at`, `registration_ip`, `created_at`, `updated_at`, `flags`, `last_login_at`) VALUES
-(6, 'sysadmintransit', 'aguseasdasdyc@gmail.com', '$2y$10$tCuc/jO7/hlVciuw8Ve8R.g0IKMIDP8F2JrSKjqwqqCYUv0dci3SG', 'tsD6aTfCdBpgypkzj9aVK-C-dIlC6cAD', 1575250443, NULL, NULL, '172.18.0.1', 1575250443, 1575250443, 0, 1588472651),
+(6, 'admintransit', 'aguseasdasdyc@gmail.com', '$2y$10$tCuc/jO7/hlVciuw8Ve8R.g0IKMIDP8F2JrSKjqwqqCYUv0dci3SG', 'tsD6aTfCdBpgypkzj9aVK-C-dIlC6cAD', 1575250443, NULL, NULL, '172.18.0.1', 1575250443, 1588936312, 0, 1588936278),
 (12, 'agusedyc', 'edyaguasdsc@gmail.com', '$2y$10$9LFKCQef3dCfqfhit/d7LOIvBRxjZRDYBKroqJlJePyVqbS4/6oTK', 'gCQRD8bPIkVlNpYzf66PrAbUdzeFFWb7', 1578753817, NULL, NULL, '172.18.0.1', 1578753699, 1578753699, 0, NULL),
-(21, 'G.211.13.0047', 'edyagusc@gmail.com', '$2y$10$M8Ot.hZiquLHYkzjfk/V0edcc4HQpIZeKI366dMQRGpw08xdfVufq', 'xa0c6n2bFxHj23djc0pYQVYM-MupePHf', 1579614790, NULL, NULL, '172.18.0.1', 1579614767, 1579614767, 0, 1588472226),
-(22, 'sysadminapp', 'transitftikusm@gmail.com', '$2y$10$vqXaiCfDth6m2ujCA09NROAGiKOoUl1m.TbuiApVE0qdCkvrmsmYW', 'dEiHFVXjbjEaTa1nN-2VOnJ3eRXFWloz', 1580088373, NULL, NULL, '172.18.0.1', 1580088373, 1580088373, 0, 1581230519);
+(21, 'G.211.13.0047', 'edyagusc@gmail.com', '$2y$10$M8Ot.hZiquLHYkzjfk/V0edcc4HQpIZeKI366dMQRGpw08xdfVufq', 'xa0c6n2bFxHj23djc0pYQVYM-MupePHf', 1579614790, NULL, NULL, '172.18.0.1', 1579614767, 1579614767, 0, 1588939156),
+(22, 'sysadminapp', 'transitftikusm@gmail.com', '$2y$10$vqXaiCfDth6m2ujCA09NROAGiKOoUl1m.TbuiApVE0qdCkvrmsmYW', 'dEiHFVXjbjEaTa1nN-2VOnJ3eRXFWloz', 1580088373, NULL, NULL, '172.18.0.1', 1580088373, 1580088373, 0, 1588922742),
+(23, 'G.212.13.0047', 'edyagus@ymail.com', '$2y$10$b.0QVc27Ie2t1M8f1HZ1j.0Jm3yG/1g0k9SwIJVJqk0rlBOL0dg4a', '6zIqvqYuWrr-zhsKaOWlgaCVxzx5eX8A', 1588557710, NULL, NULL, '172.20.0.1', 1588557513, 1588557513, 0, NULL);
 
 --
 -- Indexes for dumped tables
@@ -719,7 +728,7 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT for table `jurnal`
 --
 ALTER TABLE `jurnal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pembimbing`
@@ -749,7 +758,7 @@ ALTER TABLE `social_account`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
