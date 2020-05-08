@@ -1,7 +1,8 @@
 <?php
 
-use yii\helpers\Html;
+use hscstudio\mimin\components\Mimin;
 use yii\grid\GridView;
+use yii\helpers\Html;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\searchs\PublicationSearch */
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Publication'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?=((Mimin::checkRoute($this->context->id.'/create',true))) ? Html::a(Yii::t('app', 'Create Publication'), ['create'], ['class' => 'btn btn-success']) : null ?>
     </p>
 <div class="box box-default collapsed-box">
 <div class="box-header with-border">

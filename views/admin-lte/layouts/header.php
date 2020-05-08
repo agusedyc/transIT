@@ -76,17 +76,17 @@ use yii\helpers\Html;
                     <!-- Account -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                            <span class="hidden-xs"><?= Profile::findOne(Yii::$app->user->id)->name ?></span>
+                            <!-- <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/> -->
+                            <span class="hidden-xs">Sign Out - <?= Profile::findOne(Yii::$app->user->id)->name ?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
-                                     alt="User Image"/>
+                                <!-- <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/> -->
+                                <br><br>
 
                                 <p>
-                                    <?= Profile::findOne(Yii::$app->user->id)->name ?> - <?= Profile::findOne(Yii::$app->user->id)->location ?>
+                                    <?= Profile::findOne(Yii::$app->user->id)->name ?> - <?= User::findOne(Yii::$app->user->id)->username ?>
                                     <small><?= Yii::t('user', 'Regiserd {0, date, MMMM dd, YYYY HH:mm}', [User::findOne(Yii::$app->user->id)->created_at]) ?></small>
                                 </p>
                             </li>
