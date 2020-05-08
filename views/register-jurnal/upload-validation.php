@@ -34,6 +34,12 @@
 		<td style="width:35%; text-align: left;"></td>
 	</tr>
 	<tr>
+		<td style="width:19%; text-align: left;">No Tlp</td>
+		<td style="width:1%">:</td>
+		<td style="width:45%; text-align: left;"><?= $profile->phone; ?></td>
+		<td style="width:35%; text-align: left;"></td>
+	</tr>
+	<tr>
 		<td style="width:19%; text-align: left;">Judul Jurnal</td>
 		<td style="width:1%">:</td>
 		<td style="width:45%; text-align: left;" colspan="2"><?= $jurnal->judul; ?></td>
@@ -126,6 +132,12 @@
 		<td style="width:19%; text-align: left;">NIM</td>
 		<td style="width:1%">:</td>
 		<td style="width:45%; text-align: left;"><?= $jurnal->user->username; ?></td>
+		<td style="width:35%; text-align: left;"></td>
+	</tr>
+	<tr>
+		<td style="width:19%; text-align: left;">No Tlp</td>
+		<td style="width:1%">:</td>
+		<td style="width:45%; text-align: left;"><?= $profile->phone; ?></td>
 		<td style="width:35%; text-align: left;"></td>
 	</tr>
 	<tr>
