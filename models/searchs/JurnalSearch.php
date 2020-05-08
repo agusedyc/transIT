@@ -11,14 +11,15 @@ use app\models\Jurnal;
  */
 class JurnalSearch extends Jurnal
 {
+    public $name;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'user_id', 'upload_ke', 'pembimbing_1', 'pembimbing_2', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
-            [['judul', 'jurnal', 'abstrak', 'tgl_upload', 'nourutjurnal', 'nojurnal', 'vol', 'tgl_jurnal'], 'safe'],
+            [['id', 'upload_ke', 'pembimbing_1', 'pembimbing_2', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
+            [['name','user_id','judul', 'jurnal', 'abstrak', 'tgl_upload', 'nourutjurnal', 'nojurnal', 'vol', 'tgl_jurnal'], 'safe'],
         ];
     }
 
@@ -56,9 +57,12 @@ class JurnalSearch extends Jurnal
             return $dataProvider;
         }
 
+        $query->joinWith('user','profile');
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            // 'name' => $this->name,
             'user_id' => $this->user_id,
             'upload_ke' => $this->upload_ke,
             'tgl_upload' => $this->tgl_upload,
@@ -71,6 +75,8 @@ class JurnalSearch extends Jurnal
         ]);
 
         $query->andFilterWhere(['like', 'judul', $this->judul])
+            ->orFilterWhere(['like', 'user.username', $this->user_id])
+            // ->orFilterWhere(['like', 'profile.name', $this->name])
             ->andFilterWhere(['like', 'jurnal', $this->jurnal])
             ->andFilterWhere(['like', 'abstrak', $this->abstrak])
             ->andFilterWhere(['like', 'nourutjurnal', $this->nourutjurnal])

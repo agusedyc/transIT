@@ -1,8 +1,8 @@
-assets/*
-!assets/.gitignore
 vendor/*
 
 *.sublime-workspace
 web/uploads/pre-journal/
 
 composer.lock
+
+web/uploads/article/

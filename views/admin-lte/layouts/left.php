@@ -1,3 +1,8 @@
+<?php 
+use app\models\User;
+use dektrium\user\models\Profile;
+use hscstudio\mimin\components\Mimin;
+ ?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -5,10 +10,11 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                <!-- <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/> -->
+                <br><br>
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p><?= Profile::findOne(Yii::$app->user->id)->name ?></p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -26,8 +32,7 @@
         </form>
         <?php 
 
-        use app\models\User;
-        use hscstudio\mimin\components\Mimin;
+        
         $menuItems = [
                 ['label' => 'TransIT', 'options' => ['class' => 'header']],
                 ['label' => 'User Management','icon' => 'user','url' => '#','items' => [
@@ -39,10 +44,12 @@
                 ],
                 ['label' => 'Pengelola','icon' => 'book','url' => '#','items' => [
                         ['label' => 'Pembimbing', 'icon' => 'users', 'url' => ['/pembimbing/index'],],
-                        ['label' => 'Jurnal', 'icon' => 'file-code-o', 'url' => ['/jurnal/index'],],
-                        // ['label' => 'Level', 'icon' => 'list-ol', 'url' => ['/level/index'],],
+                        ['label' => 'Jurnal', 'icon' => 'file', 'url' => ['/jurnal/index'],],
+                        ['label' => 'Publikasi', 'icon' => 'files-o', 'url' => ['/publication/index'],],
+                        ['label' => 'Post', 'icon' => 'share', 'url' => ['/post/index'],],
                     ],
                 ],
+                ['label' => 'Report','icon' => 'book','url' => ['/report/index']],
                 ['label' => 'Pengajuan Jurnal','icon' => 'book','url' => '#','items' => [
                         ['label' => 'Registrasi Jurnal', 'icon' => 'files', 'url' => ['/register-jurnal/index'],],
                         // ['label' => 'Upload Jurnal', 'icon' => 'files', 'url' => ['/register-jurnal/upload'],],

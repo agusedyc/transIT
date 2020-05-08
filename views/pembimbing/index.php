@@ -1,5 +1,6 @@
 <?php
 
+use hscstudio\mimin\components\Mimin;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -16,13 +17,22 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Pembimbing'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= ((Mimin::checkRoute($this->context->id.'/create',true))) ?  Html::a(Yii::t('app', 'Create Pembimbing'), ['create'], ['class' => 'btn btn-success']) : null ?>
     </p>
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<div class="box box-warning">
+<div class="box-header with-border">
+  <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
 
-    <?= GridView::widget([
+  <div class="box-tools pull-right">
+    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+    </button>
+  </div>
+</div>
+<div class="box-body">
+  <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -63,7 +73,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
+</div>
+</div>
     <?php Pjax::end(); ?>
 
 </div>
