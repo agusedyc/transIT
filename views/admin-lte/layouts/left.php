@@ -1,3 +1,8 @@
+<?php 
+use app\models\User;
+use dektrium\user\models\Profile;
+use hscstudio\mimin\components\Mimin;
+ ?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -5,10 +10,11 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                <!-- <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/> -->
+                <br><br>
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p><?= Profile::findOne(Yii::$app->user->id)->name ?></p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -26,8 +32,7 @@
         </form>
         <?php 
 
-        use app\models\User;
-        use hscstudio\mimin\components\Mimin;
+        
         $menuItems = [
                 ['label' => 'TransIT', 'options' => ['class' => 'header']],
                 ['label' => 'User Management','icon' => 'user','url' => '#','items' => [

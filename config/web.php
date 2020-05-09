@@ -55,7 +55,7 @@ $config = [
             ],
             'enableConfirmation' => true,
             'enableUnconfirmedLogin' => false,
-            'admins' => ['sysadmintransit','sysadminapp'],
+            'admins' => ['admintransit','sysadminapp'],
         ],
     ],
     'components' => [
@@ -94,7 +94,7 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => false,
             // 'class' => 'app\components\User',
             // 'identityClass' => 'dektrium\user\models\User',
         ],

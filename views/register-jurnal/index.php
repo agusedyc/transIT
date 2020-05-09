@@ -59,6 +59,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 
                 <?= $form->field($profile, 'name') ?>
 
+                <?= $form->field($profile, 'phone') ?>
+
                 <?= $form->field($jurnal, 'judul') ?>
 
                 <?= $form->field($jurnal, 'abstrak')->textarea(['rows' => '6']) ?>

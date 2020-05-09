@@ -1,6 +1,7 @@
 <?php
-use yii\helpers\Html;
+use hscstudio\mimin\components\Mimin;
 use yii\grid\GridView;
+use yii\helpers\Html;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\searchs\JurnalSearch */
@@ -85,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'contentOptions' => ['class' => 'text-wrap'],
                 'format' => 'raw',
                 'value' => function($data){
-                    return $data->pembimbingOne->pembimbing;
+                    return (isset($data->pembimbing_1)) ? $data->pembimbingOne->pembimbing : null;
                 },
             ],
             [
@@ -107,7 +108,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_at',
             //'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            // ['class' => 'yii\grid\ActionColumn'],
+            // [
+            //   'class' => 'yii\grid\ActionColumn',
+            //   'template' => Mimin::filterActionColumn([
+            //       'update','delete','view'
+            //   ],$this->context->route),
+            // ]
         ],
     ]); ?>
 </div>

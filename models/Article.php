@@ -73,7 +73,7 @@ class Article extends \yii\db\ActiveRecord
             [['title', 'slug'], 'string', 'max' => 765],
             [['author', 'keywords'], 'string', 'max' => 255],
             [['document'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf'],
-            [['issn', 'doi'], 'string', 'max' => 50],
+            [['issn', 'doi','pages'], 'string', 'max' => 50],
             [['pub_id'], 'exist', 'skipOnError' => true, 'targetClass' => Publication::className(), 'targetAttribute' => ['pub_id' => 'id']],
         ];
     }
@@ -94,6 +94,7 @@ class Article extends \yii\db\ActiveRecord
             'document' => Yii::t('app', 'Document'),
             'issn' => Yii::t('app', 'Issn'),
             'doi' => Yii::t('app', 'Doi'),
+            'pages' => Yii::t('app', 'Pages'),
             'viewed' => Yii::t('app', 'Viewed'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
