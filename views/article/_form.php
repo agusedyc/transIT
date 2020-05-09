@@ -31,6 +31,8 @@ $request = Yii::$app->request;
 
     <?= $form->field($model, 'doi')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'pages')->textInput(['maxlength' => true]) ?>
+
     <!-- <?= $form->field($model, 'viewed')->textInput() ?> -->
 
     <!-- <?= $form->field($model, 'created_at')->textInput() ?> -->
