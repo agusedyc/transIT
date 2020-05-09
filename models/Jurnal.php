@@ -30,6 +30,15 @@ use yii\db\ActiveRecord;
  */
 class Jurnal extends \yii\db\ActiveRecord
 {
+
+    const status_review = 0;
+    const status_publish = 1;
+
+    public $status_list = [
+        self::status_review => 'Review',
+        self::status_publish => 'Published',
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -68,7 +77,7 @@ class Jurnal extends \yii\db\ActiveRecord
     {
         return [
             // [['pembimbing_1', 'id', 'judul', 'jurnal', 'abstrak', 'tgl_upload', 'nojurnal', 'vol', 'tgl_jurnal', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'required'],
-            [['id', 'user_id', 'upload_ke', 'pembimbing_1', 'pembimbing_2', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'user_id', 'upload_ke', 'pembimbing_1', 'pembimbing_2', 'created_by', 'updated_by', 'created_at', 'updated_at','reviewed'], 'integer'],
             // ['pembimbing_1', 'compare','compareAttribute'=>'pembimbing_2','operator'=> '!=='],
             [['abstrak'], 'string'],
             [['tgl_upload'], 'safe'],
@@ -77,6 +86,8 @@ class Jurnal extends \yii\db\ActiveRecord
             [['nourutjurnal', 'nojurnal', 'vol'], 'string', 'max' => 8],
             [['tgl_jurnal'], 'string', 'max' => 50],
             [['id','user_id'], 'unique'],
+            ['reviewed', 'default', 'value' => self::status_review],
+            ['reviewed', 'in', 'range' => [self::status_publish, self::status_review]],
         ];
     }
 
@@ -98,6 +109,7 @@ class Jurnal extends \yii\db\ActiveRecord
             'nourutjurnal' => Yii::t('app', 'Nourutjurnal'),
             'nojurnal' => Yii::t('app', 'Nojurnal'),
             'vol' => Yii::t('app', 'Vol'),
+            'reviewed' => Yii::t('app', 'Status'),
             'tgl_jurnal' => Yii::t('app', 'Tgl Jurnal'),
             'created_by' => Yii::t('app', 'Created By'),
             'updated_by' => Yii::t('app', 'Updated By'),
@@ -119,5 +131,10 @@ class Jurnal extends \yii\db\ActiveRecord
     public function getPembimbingTwo()
     {
         return $this->hasOne(Pembimbing::className(), ['id' => 'pembimbing_2']);
+    }
+
+    public function getReview($status)
+    {
+        return $this->status_list[$status];
     }
 }
