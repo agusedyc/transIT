@@ -59,6 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'issn',
                         'doi',
+                        'pages',
                         'viewed',
                         'created_at:datetime',
                         'updated_at:datetime',
