@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $model app\models\Article */
 
 $this->title = Yii::t('app', 'Create Article');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Articles'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Articles'), 'url' => ['index']];
+// $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-create">
 
@@ -15,6 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'jurnal' => $jurnal,
+        'profile' => $profile,
     ]) ?>
 
 </div>
