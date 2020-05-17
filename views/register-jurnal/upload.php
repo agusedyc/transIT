@@ -77,6 +77,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($profile, 'name')->textInput(['class' => 'form-control', 'disabled' => true]) ?>
 
+                <?= $form->field($profile, 'phone')->textInput(['class' => 'form-control', 'disabled' => true]) ?>
+
                 <?= $form->field($jurnal, 'judul')->textInput(['class' => 'form-control', 'disabled' => true]) ?>
 
                 <?= $form->field($jurnal, 'abstrak')->textarea(['rows' => '6', 'class' => 'form-control', 'disabled' => true]) ?>
@@ -122,9 +124,8 @@ $this->params['breadcrumbs'][] = $this->title;
                          ?>
                     </div>
                 </div>
-
+                <small class="label pull-right bg-orange">Only .doc and .docx</small>
                 <?= $form->field($jurnal, 'jurnal')->fileInput() ?>
-                
                 <div class="form-group">
                     <div class="col-lg-offset-3 col-lg-9">
                         <?= Html::submitButton('Save', ['class' => 'btn btn-block btn-success']) ?>

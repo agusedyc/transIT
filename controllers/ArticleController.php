@@ -4,9 +4,12 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Article;
+use app\models\Jurnal;
+use app\models\Profile;
 use app\models\Publication;
 use app\models\searchs\ArticleSearch;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -67,6 +70,8 @@ class ArticleController extends Controller
      */
     public function actionCreate($id)
     {
+        $user_id = Yii::$app->request->get('user_id');        
+        $jurnal = Jurnal::find()->where(['user_id'=>$user_id])->one();
         $pub = Publication::findOne($id);
         $model = new Article();
 
@@ -80,13 +85,21 @@ class ArticleController extends Controller
                 $model->document = $path.'/'.$model->document;  
                 $model->pub_id = $id;
                 $model->save();
+                $jurnal->reviewed = '1';
+                $jurnal->save(false);
                 return $this->redirect(['publication/view', 'id' => $id]);    
             }
             
         }
 
+        // echo '<pre>';
+        // print_r($user_id);
+
         return $this->render('create', [
             'model' => $model,
+            'jurnal' => $jurnal,
+            'profile' => ArrayHelper::map(Profile::find()->where(['in','user_id',Jurnal::find()->select('user_id')->where(['reviewed'=>'0'])->all()])->asArray()->all(), 'user_id', 'name'),
+            // 'profile' => Profile::find()->select('name')->asArray()->all(),
         ]);
     }
 
@@ -99,6 +112,8 @@ class ArticleController extends Controller
      */
     public function actionUpdate($id)
     {
+        $user_id = Yii::$app->request->get('user_id');        
+        $jurnal = Jurnal::find()->where(['user_id'=>$user_id])->one();
         $model = $this->findModel($id);
         $pub = Publication::findOne($model->pub_id);
         $old_doc = $model->document;
@@ -117,6 +132,8 @@ class ArticleController extends Controller
         }
         return $this->render('update', [
             'model' => $model,
+            'jurnal' => null,
+            'profile' => ArrayHelper::map(Profile::find()->where(['in','user_id',Jurnal::find()->select('user_id')->where(['reviewed'=>'0'])->all()])->asArray()->all(), 'user_id', 'name'),
         ]);
     }
 
