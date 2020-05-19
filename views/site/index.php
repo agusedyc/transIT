@@ -4,7 +4,7 @@ use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
 
-$this->title = 'Trans IT - Jurnal Transit FTIK USM';
+$this->title = 'Jurnal Transit FTIK USM';
 ?>
 <div class="container">
       <!-- Content Header (Page header) -->

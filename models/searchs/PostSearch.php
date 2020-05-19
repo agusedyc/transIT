@@ -18,7 +18,7 @@ class PostSearch extends Post
     {
         return [
             [['id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['title', 'slug', 'content'], 'safe'],
+            [['title', 'slug', 'content','categories_id'], 'safe'],
         ];
     }
 
@@ -56,9 +56,12 @@ class PostSearch extends Post
             return $dataProvider;
         }
 
+        $query->joinWith('categories');
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'categories_id' => $this->categories_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'created_by' => $this->created_by,
@@ -66,6 +69,7 @@ class PostSearch extends Post
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
+            ->orFilterWhere(['like', 'categories.categories', $this->categories_id])
             ->andFilterWhere(['like', 'slug', $this->slug])
             ->andFilterWhere(['like', 'content', $this->content]);
 

@@ -21,7 +21,7 @@ use hscstudio\mimin\components\Mimin;
         </div>
 
         <!-- search form -->
-        <form action="#" method="get" class="sidebar-form">
+        <!-- <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search..."/>
               <span class="input-group-btn">
@@ -29,7 +29,7 @@ use hscstudio\mimin\components\Mimin;
                 </button>
               </span>
             </div>
-        </form>
+        </form> -->
         <?php 
 
         
@@ -46,7 +46,11 @@ use hscstudio\mimin\components\Mimin;
                         ['label' => 'Pembimbing', 'icon' => 'users', 'url' => ['/pembimbing/index'],],
                         ['label' => 'Jurnal', 'icon' => 'file', 'url' => ['/jurnal/index'],],
                         ['label' => 'Publikasi', 'icon' => 'files-o', 'url' => ['/publication/index'],],
+                    ],
+                ],
+                ['label' => 'Pengumuman','icon' => 'bullhorn','url' => '#','items' => [
                         ['label' => 'Post', 'icon' => 'share', 'url' => ['/post/index'],],
+                        ['label' => 'Categories', 'icon' => 'files-o', 'url' => ['/categories/index'],],
                     ],
                 ],
                 ['label' => 'Report','icon' => 'book','url' => ['/report/index']],

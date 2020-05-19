@@ -81,4 +81,9 @@ class Post extends \yii\db\ActiveRecord
             'updated_by' => 'Updated By',
         ];
     }
+
+    public function getCategories()
+    {
+        return $this->hasOne(Categories::className(), ['id' => 'categories_id']);
+    }
 }

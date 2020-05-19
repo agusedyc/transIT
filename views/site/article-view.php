@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 $data = $model; 
-$this->title = 'Trans IT - Issue';
+$this->title = 'Issue';
 ?>
 <div class="site-issue">
 <div class="box box-warning">
