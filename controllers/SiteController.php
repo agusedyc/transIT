@@ -79,16 +79,18 @@ class SiteController extends Controller
 
             $searchModelPublication = new PublicationSearch();
             $dataProviderPublication = $searchModelPublication->search(Yii::$app->request->queryParams);
-            $dataProviderPublication->query->select(['id'=>'MAX(`id`)'])->one();
+            $idPublication = $dataProviderPublication->query->select(['id'=>'MAX(`id`)'])->one();
 
             $searchModelArticle = new ArticleSearch();
             $dataProviderArticle = $searchModelArticle->search(Yii::$app->request->queryParams);
-            $dataProviderArticle->query->where(['pub_id'=>$dataProviderPublication->id])->all();
-
+            $dataProviderArticle->query->where(['pub_id'=>$idPublication->id])->all();
+            // echo '<pre>';
+            // print_r($idPublication->id);
+            // echo '</pre>';
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
-                'dataProviderPublication' => $dataProviderPublication,
+                'publication' => Publication::findOne($idPublication),
                 'dataProviderArticle' => $dataProviderArticle,
             ]);
         }else{

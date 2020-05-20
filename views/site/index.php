@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Html;
 use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
@@ -49,30 +50,30 @@ $this->title = 'Jurnal Transit FTIK USM';
                 'pagination' => $dataProvider->pagination,
             ]);
          ?>
-      <br><br>
+      <?php if (Yii::$app->controller->action->id=='index'): ?>
       <?php 
-      echo '<pre>';
-      print_r($dataProviderArticle->getModels());
-      echo '</pre>';
+      $pub = $publication;
+      // echo '<pre>';
+      // print_r($pub);
+      // echo '</pre>';
        ?>
             <div class="box box-default">
               <div class="box-header with-border">
-                <h3 class="box-title"><?php //echo $value->title; ?></h3>
+                <h3 class="box-title"><?= Html::a('Publikasi Terakhir Vol '.$pub->vol.', No '.$pub->no.'('.$pub->years_pub.') : '.date('F', mktime(0, 0, 0, $pub->month_pub, 10)).' '.$pub->years_pub, ['issue-view', 'id' => $pub->id]) ?></h3>
               </div>
               <div class="box-body">
                 <table class="table table-striped">
                 <tbody>
                 <?php foreach ($dataProviderArticle->getModels() as $value): ?>
                 <tr>
-                  <td>#</td>
                   <td>
-                    <?= $value->title ?><br>
+                    <?= Html::a($value->title,['/site/article','title'=>$value->slug]); ?><br>
                     <?= $value->author ?><br><br>
-                    <?= $value->doi ?>
+                    <?= 'DOI '.$value->doi ?> | <?= 'Abstract Viewed '.$value->viewed ?>
                   </td>
                   <td>
-                    <?= $value->file ?><br>
-                    <?= $value->pages ?>
+                    <?= Html::a('Download',[$value->document]); ?><br>
+                    <?= 'Pages '.$value->pages ?>
                   </td>
                   <td>
                   </td>
@@ -83,9 +84,10 @@ $this->title = 'Jurnal Transit FTIK USM';
               </div>
             </div>
         <?php echo LinkPager::widget([
-                'pagination' => $dataProviderPublication->pagination,
+                'pagination' => $dataProviderArticle->pagination,
             ]);
          ?>
+      <?php endif ?>
       </section>
       <!-- /.content -->
     </div>
