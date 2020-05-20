@@ -5,7 +5,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 
-$this->title = 'Trans IT - Issue';
+$this->title = 'Issue';
 ?>
 <div class="site-issue">
 <div class="box box-warning">

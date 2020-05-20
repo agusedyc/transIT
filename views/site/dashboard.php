@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'Trans IT - Jurnal Transit FTIK USM';
+$this->title = 'Jurnal Transit FTIK USM';
 ?>
 <div class="site-index">
 

@@ -5,16 +5,16 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\searchs\PostSearch */
+/* @var $searchModel app\models\searchs\CategoriesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Posts');
+$this->title = Yii::t('app', 'Categories');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <p>
-    <?= ((Mimin::checkRoute($this->context->id.'/create',true))) ? Html::a(Yii::t('app', 'Create Post'), ['create'], ['class' => 'btn btn-success']) : null ?>
+    <?= ((Mimin::checkRoute($this->context->id.'/create',true))) ? Html::a(Yii::t('app', 'Create Categories'), ['create'], ['class' => 'btn btn-success']) : null ?>
 </p>
-<div class="box box-default box-solid post-index">
+<div class="box box-default box-solid categories-index">
     <div class="box-header with-border">
       <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
       <div class="box-tools pull-right">
@@ -33,19 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
 
                 // 'id',
-                'title',
-                [
-                    'label' => 'Categories',
-                    'attribute' => 'categories_id',
-                    'format' => 'raw',
-                    'value' => function($data){
-                        return $data->categories->categories;
-                    },
-                ],
+                'categories',
                 // 'slug',
-                // 'content:ntext',
-                'created_at:datetime',
-                //'updated_at',
+                // 'created_at',
+                'updated_at:datetime',
                 //'created_by',
                 //'updated_by',
 

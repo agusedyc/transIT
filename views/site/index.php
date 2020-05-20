@@ -1,10 +1,11 @@
 <?php
 
+use yii\helpers\Html;
 use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
 
-$this->title = 'Trans IT - Jurnal Transit FTIK USM';
+$this->title = 'Jurnal Transit FTIK USM';
 ?>
 <div class="container">
       <!-- Content Header (Page header) -->
@@ -49,6 +50,44 @@ $this->title = 'Trans IT - Jurnal Transit FTIK USM';
                 'pagination' => $dataProvider->pagination,
             ]);
          ?>
+      <?php if (Yii::$app->controller->action->id=='index'): ?>
+      <?php 
+      $pub = $publication;
+      // echo '<pre>';
+      // print_r($pub);
+      // echo '</pre>';
+       ?>
+            <div class="box box-default">
+              <div class="box-header with-border">
+                <h3 class="box-title"><?= Html::a('Publikasi Terakhir Vol '.$pub->vol.', No '.$pub->no.'('.$pub->years_pub.') : '.date('F', mktime(0, 0, 0, $pub->month_pub, 10)).' '.$pub->years_pub, ['issue-view', 'id' => $pub->id]) ?></h3>
+              </div>
+              <div class="box-body">
+                <table class="table table-striped">
+                <tbody>
+                <?php foreach ($dataProviderArticle->getModels() as $value): ?>
+                <tr>
+                  <td>
+                    <?= Html::a($value->title,['/site/article','title'=>$value->slug]); ?><br>
+                    <?= $value->author ?><br><br>
+                    <?= 'DOI '.$value->doi ?> | <?= 'Abstract Viewed '.$value->viewed ?>
+                  </td>
+                  <td>
+                    <?= Html::a('Download',[$value->document]); ?><br>
+                    <?= 'Pages '.$value->pages ?>
+                  </td>
+                  <td>
+                  </td>
+                </tr>
+                <?php endforeach ?>
+              </tbody>
+            </table>
+              </div>
+            </div>
+        <?php echo LinkPager::widget([
+                'pagination' => $dataProviderArticle->pagination,
+            ]);
+         ?>
+      <?php endif ?>
       </section>
       <!-- /.content -->
     </div>

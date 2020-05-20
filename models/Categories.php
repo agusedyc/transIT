@@ -9,25 +9,24 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "post".
+ * This is the model class for table "categories".
  *
  * @property int $id
- * @property string|null $title
+ * @property string|null $categories
  * @property string|null $slug
- * @property string|null $content
  * @property int|null $created_at
  * @property int|null $updated_at
  * @property int|null $created_by
  * @property int|null $updated_by
  */
-class Post extends \yii\db\ActiveRecord
+class Categories extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'post';
+        return 'categories';
     }
 
     public function behaviors()
@@ -47,7 +46,7 @@ class Post extends \yii\db\ActiveRecord
             ],
             'sluggable' => [
                 'class' => SluggableBehavior::className(),
-                'attribute' => 'title',
+                'attribute' => 'categories',
                 'slugAttribute' => 'slug',
             ],
         ];
@@ -59,9 +58,8 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content'], 'string'],
-            [['created_at', 'updated_at', 'created_by', 'updated_by','categories_id'], 'integer'],
-            [['title', 'slug'], 'string', 'max' => 255],
+            [['created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['categories', 'slug'], 'string', 'max' => 255],
         ];
     }
 
@@ -71,20 +69,13 @@ class Post extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'title' => 'Title',
-            'slug' => 'Slug',
-            'content' => 'Content',
-            'categories_id' => 'Categories',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
+            'id' => Yii::t('app', 'ID'),
+            'categories' => Yii::t('app', 'Categories'),
+            'slug' => Yii::t('app', 'Slug'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
+            'created_by' => Yii::t('app', 'Created By'),
+            'updated_by' => Yii::t('app', 'Updated By'),
         ];
-    }
-
-    public function getCategories()
-    {
-        return $this->hasOne(Categories::className(), ['id' => 'categories_id']);
     }
 }

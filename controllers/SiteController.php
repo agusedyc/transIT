@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Article;
+use app\models\Categories;
 use app\models\ContactForm;
 use app\models\LoginForm;
 use app\models\Publication;
@@ -74,17 +75,54 @@ class SiteController extends Controller
         if (Yii::$app->user->isGuest) {
             $searchModel = new PostSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-            $dataProvider->setPagination(['pageSize' => 5]);
+            $dataProvider->query->where(['categories_id' => Categories::find()->where(['slug'=>'pengumuman'])->one()->id]);
 
+            $searchModelPublication = new PublicationSearch();
+            $dataProviderPublication = $searchModelPublication->search(Yii::$app->request->queryParams);
+            $idPublication = $dataProviderPublication->query->select(['id'=>'MAX(`id`)'])->one();
+
+            $searchModelArticle = new ArticleSearch();
+            $dataProviderArticle = $searchModelArticle->search(Yii::$app->request->queryParams);
+            $dataProviderArticle->query->where(['pub_id'=>$idPublication->id])->all();
+            // echo '<pre>';
+            // print_r($idPublication->id);
+            // echo '</pre>';
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
+                'publication' => Publication::findOne($idPublication),
+                'dataProviderArticle' => $dataProviderArticle,
             ]);
-            // return $this->render('index');    
         }else{
             return $this->render('dashboard');
         }
         
+    }
+
+    public function actionAlurJurnal()
+    {
+        $searchModel = new PostSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->where(['categories_id' => Categories::find()->where(['slug'=>Yii::$app->controller->action->id])->one()->id]);
+        $dataProvider->setPagination(['pageSize' => 5]);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionTemplateJurnal()
+    {
+        $searchModel = new PostSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->where(['categories_id' => Categories::find()->where(['slug'=>Yii::$app->controller->action->id])->one()->id]);
+        $dataProvider->setPagination(['pageSize' => 5]);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**

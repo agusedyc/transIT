@@ -20,7 +20,7 @@ use yii\helpers\Html;
         <meta charset="<?= Yii::$app->charset ?>"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= Html::csrfMetaTags() ?>
-        <title><?= Html::encode($this->title) ?></title>
+        <title>Trans IT | <?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head>
     <body class="<?= \dmstr\helpers\AdminLteHelper::skinClass() ?> layout-top-nav" style="height: auto; min-height: 100%;" data-gr-c-s-loaded="true">
