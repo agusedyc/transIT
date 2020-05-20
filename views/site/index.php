@@ -82,11 +82,11 @@ $this->title = 'Jurnal Transit FTIK USM';
               </tbody>
             </table>
               </div>
-            </div>
-        <?php echo LinkPager::widget([
+              <?php echo LinkPager::widget([
                 'pagination' => $dataProviderArticle->pagination,
             ]);
          ?>
+            </div>
       <?php endif ?>
       </section>
       <!-- /.content -->

@@ -60,11 +60,6 @@ class SiteController extends Controller
         ];
     }
 
-    // public function actionMain()
-    // {
-    //      return $this->render('dashboard');
-    // }
-
     /**
      * Displays homepage.
      *
