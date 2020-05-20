@@ -60,7 +60,7 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [['content'], 'string'],
-            [['created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['created_at', 'updated_at', 'created_by', 'updated_by','categories_id'], 'integer'],
             [['title', 'slug'], 'string', 'max' => 255],
         ];
     }
@@ -75,6 +75,7 @@ class Post extends \yii\db\ActiveRecord
             'title' => 'Title',
             'slug' => 'Slug',
             'content' => 'Content',
+            'categories_id' => 'Categories',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',

@@ -49,6 +49,43 @@ $this->title = 'Jurnal Transit FTIK USM';
                 'pagination' => $dataProvider->pagination,
             ]);
          ?>
+      <br><br>
+      <?php 
+      echo '<pre>';
+      print_r($dataProviderArticle->getModels());
+      echo '</pre>';
+       ?>
+            <div class="box box-default">
+              <div class="box-header with-border">
+                <h3 class="box-title"><?php //echo $value->title; ?></h3>
+              </div>
+              <div class="box-body">
+                <table class="table table-striped">
+                <tbody>
+                <?php foreach ($dataProviderArticle->getModels() as $value): ?>
+                <tr>
+                  <td>#</td>
+                  <td>
+                    <?= $value->title ?><br>
+                    <?= $value->author ?><br><br>
+                    <?= $value->doi ?>
+                  </td>
+                  <td>
+                    <?= $value->file ?><br>
+                    <?= $value->pages ?>
+                  </td>
+                  <td>
+                  </td>
+                </tr>
+                <?php endforeach ?>
+              </tbody>
+            </table>
+              </div>
+            </div>
+        <?php echo LinkPager::widget([
+                'pagination' => $dataProviderPublication->pagination,
+            ]);
+         ?>
       </section>
       <!-- /.content -->
     </div>

@@ -3,10 +3,12 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Categories;
 use app\models\Post;
 use app\models\UploadForm;
 use app\models\searchs\PostSearch;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -68,7 +70,7 @@ class PostController extends Controller
     public function actionCreate()
     {
         $model = new Post();
-
+        $categories_list = ArrayHelper::map(Categories::find()->asArray()->all(), 'id', 'categories'); 
         if ($model->load(Yii::$app->request->post())) {
             $model->content = str_replace('<p data-f-id="pbf" style="text-align: center; font-size: 14px; margin-top: 30px; opacity: 0.65; font-family: sans-serif;">Powered by <a href="https://www.froala.com/wysiwyg-editor?pb=1" title="Froala Editor">Froala Editor</a></p>', "", $model->content);
             $uploadFile = UploadedFile::getInstance($model, 'image_featured');
@@ -85,6 +87,7 @@ class PostController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'categories_list' => $categories_list,
         ]);
     }
 
@@ -121,13 +124,14 @@ class PostController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $categories_list = ArrayHelper::map(Categories::find()->asArray()->all(), 'id', 'categories'); 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'categories_list' => $categories_list,
         ]);
     }
 

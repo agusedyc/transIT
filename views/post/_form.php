@@ -1,6 +1,7 @@
 <?php
 
 use hscstudio\mimin\components\Mimin;
+use kartik\widgets\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -38,7 +39,7 @@ use yii\widgets\ActiveForm;
                 'height' => 600,
                 'theme' => 'royal',//optional: dark, red, gray, royal
                 // 'language' => 'en_gb' ,
-                'toolbarButtons' => ['fullScreen','insertImage','insertLink', 'bold', 'italic', 'underline', 'paragraphStyle', 'paragraphFormat','alignRight','alignCenter','alignLeft','alignJustify','formatOL','formatUL','outdent', 'indent','table'],
+                'toolbarButtons' => ['fullScreen','insertImage','insertFile','insertLink', 'bold', 'italic', 'underline', 'paragraphStyle', 'paragraphFormat','alignRight','alignCenter','alignLeft','alignJustify','formatOL','formatUL','outdent', 'indent','table'],
                 'imageUploadParam' => 'file',
                 'imageUploadURL' => \yii\helpers\Url::to(['post/upload']),
                 'imageUploadParams' => [
@@ -47,9 +48,25 @@ use yii\widgets\ActiveForm;
                 'imageManagerDeleteParams' => [
                     Yii::$app->request->csrfParam => Yii::$app->request->getCsrfToken(),
                 ],
+                'fileUploadParam' => 'file',
+                'fileUploadURL' => \yii\helpers\Url::to(['post/upload']),
+                'fileUploadParams' => [
+                    Yii::$app->request->csrfParam => Yii::$app->request->getCsrfToken(),
+                ],
+                'fileManagerDeleteParams' => [
+                    Yii::$app->request->csrfParam => Yii::$app->request->getCsrfToken(),
+                ],
             ],
-            'clientPlugins'=> ['fullscreen', 'paragraph_format', 'image','link','align','table','lists']
+            'clientPlugins'=> ['fullscreen', 'paragraph_format', 'image','link','align','table','lists','file']
         ]); ?>
+
+        <?= $form->field($model, 'categories_id')->widget(Select2::classname(), [
+            'data' => $categories_list,
+            'options' => ['placeholder' => 'Select ...'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]); ?>  
 
         <!-- <?= $form->field($model, 'created_at')->textInput() ?> -->
 
