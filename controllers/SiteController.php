@@ -6,7 +6,10 @@ use Yii;
 use app\models\Article;
 use app\models\Categories;
 use app\models\ContactForm;
+use app\models\Jurnal;
 use app\models\LoginForm;
+use app\models\Pembimbing;
+use app\models\Profile;
 use app\models\Publication;
 use app\models\searchs\ArticleSearch;
 use app\models\searchs\PostSearch;
@@ -89,7 +92,51 @@ class SiteController extends Controller
                 'dataProviderArticle' => $dataProviderArticle,
             ]);
         }else{
-            return $this->render('dashboard');
+            // Jurnal Berdasar Pembimbing
+            $stats = Jurnal::find()->select('count(id) as counters, pembimbing_1')->groupBy('pembimbing_1')->asArray()->all();
+            foreach ($stats as $value) {
+                $pembimbing = Pembimbing::findOne($value['pembimbing_1']);
+                $stats_pembimbing[] = [
+                    'pembimbing' =>$pembimbing->pembimbing,
+                    'status' => $pembimbing->getStatus($pembimbing->status_active),
+                    'counters' => $value['counters'],
+                ];
+            }
+            // Jurnal Berdsar NIM Jurusan Pagi/Sore
+            $stats_kelompok = [
+                [
+                    'kelompok' =>'Sistem Informasi Kelas Pagi',
+                    'jumlah' => Profile::find()->select('nim')->where(['LIKE', 'nim', 'G.111'])->count(),
+                ],
+                [
+                    'kelompok' =>'Sistem Informasi Kelas Sore',
+                    'jumlah' => Profile::find()->select('nim')->where(['LIKE', 'nim', 'G.131'])->count(),
+                ],
+                [
+                    'kelompok' =>'Teknik Informatika Kelas Pagi',
+                    'jumlah' => Profile::find()->select('nim')->where(['LIKE', 'nim', 'G.211'])->count(),
+                ],
+                [
+                    'kelompok' =>'Teknik Informatika Kelas Sore',
+                    'jumlah' => Profile::find()->select('nim')->where(['LIKE', 'nim', 'G.231'])->count(),
+                ],
+                [
+                    'kelompok' =>'Ilmu Komunikasi Kelas Pagi',
+                    'jumlah' => Profile::find()->select('nim')->where(['LIKE', 'nim', 'G.311'])->count(),
+                ],
+                [
+                    'kelompok' =>'Ilmu Komunikasi Kelas Sore',
+                    'jumlah' => Profile::find()->select('nim')->where(['LIKE', 'nim', 'G.331'])->count(),
+                ],
+
+            ];
+            // echo '<pre>';
+            // print_r($stats_kelompok);
+            // echo '</pre>';
+            return $this->render('dashboard',[
+                'stats_pembimbing' => $stats_pembimbing,
+                'stats_kelompok' => $stats_kelompok,
+            ]);
         }
         
     }
