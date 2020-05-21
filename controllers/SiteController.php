@@ -226,7 +226,10 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        $pembimbing = Pembimbing::find()->all();
+        return $this->render('about',[
+            'pembimbing' => $pembimbing,
+        ]);
     }
 
     public function actionIssue()

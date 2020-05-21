@@ -5,9 +5,11 @@ namespace app\controllers;
 use Yii;
 use app\models\Pembimbing;
 use app\models\searchs\PembimbingSearch;
+use yii\filters\VerbFilter;
+use yii\helpers\FileHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * PembimbingController implements the CRUD actions for Pembimbing model.
@@ -66,12 +68,19 @@ class PembimbingController extends Controller
     {
         $model = new Pembimbing();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->status_active = $model->status_active==1?10:0;
-            if ($model->save()) {
+        if (Yii::$app->request->post()) {
+            $model->foto = UploadedFile::getInstance($model, 'foto');
+            if ($model->foto && $model->validate()) {
+                $path = 'uploads/pembimbing/';
+                FileHelper::createDirectory($path);            
+                $model->foto->saveAs($path.'/'.$model->foto->baseName . '.' . $model->foto->extension);
+                $model->foto = $path.'/'.$model->foto;
+                // $model->status_active = $model->status_active==1?10:0;
+                $model->load(Yii::$app->request->post());
+                $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);    
             }
-            
+
         }
 
         return $this->render('create', [
@@ -90,8 +99,21 @@ class PembimbingController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        // echo '<pre>';
+        // print_r(Yii::$app->request->post());
+        // echo '</pre>';
+        if (Yii::$app->request->post()) {
+            $model->load(Yii::$app->request->post());
+            // $model->status_active = $model->status_active==1?10:0;
+            $model->foto = UploadedFile::getInstance($model, 'foto');
+            if ($model->foto && $model->validate()) {
+                $path = 'uploads/pembimbing/';
+                FileHelper::createDirectory($path);            
+                $model->foto->saveAs($path.'/'.$model->foto->baseName . '.' . $model->foto->extension);
+                $model->foto = $path.'/'.$model->foto;
+                $model->save();
+                return $this->redirect(['view', 'id' => $model->id]);    
+            }
         }
 
         return $this->render('update', [
@@ -127,5 +149,21 @@ class PembimbingController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+    public function actionSetStatus($id)
+    {
+        $model = $this->findModel($id);
+        if ($model->status_active == '10') {
+            // Jikas Status Aktif
+            $model->status_active = 0;
+            $model->save();
+            return $this->redirect(Yii::$app->request->referrer);
+        }else{
+            // Jikas Status Tidak Aktif
+            $model->status_active = 10;
+            $model->save();
+            return $this->redirect(Yii::$app->request->referrer);
+        }
     }
 }

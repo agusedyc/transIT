@@ -18,6 +18,7 @@ class PembimbingSearch extends Pembimbing
     {
         return [
             [['id', 'status_active', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['foto','jabatan','tlp'], 'string', 'max' => 255],
             [['pembimbing'], 'safe'],
         ];
     }
@@ -60,6 +61,8 @@ class PembimbingSearch extends Pembimbing
         $query->andFilterWhere([
             'id' => $this->id,
             'status_active' => $this->status_active,
+            'jabatan' => $this->jabatan,
+            'tlp' => $this->tlp,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'created_by' => $this->created_by,

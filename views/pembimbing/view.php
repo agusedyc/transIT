@@ -37,10 +37,13 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'Status',
                 'attribute' => 'status_active',
+                'format' => 'raw',
                 'value' => function($model){
-                    return $model->getStatus($model->status_active);
+                    return Html::a($model->getStatus($model->status_active), ['set-status', 'id' => $model->id]);
                 },
             ],
+            'jabatan',
+            'tlp',
 
             // 'created_at',
             // 'updated_at',

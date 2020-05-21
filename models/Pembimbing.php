@@ -67,7 +67,8 @@ class Pembimbing extends \yii\db\ActiveRecord
     {
         return [
             [['status_active', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['pembimbing'], 'string', 'max' => 200],
+            [['pembimbing','jabatan','tlp'], 'string', 'max' => 255],
+            [['foto'], 'file','skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg'],
             ['status_active', 'default', 'value' => self::status_aktif],
             ['status_active', 'in', 'range' => [self::status_aktif, self::status_tidak_aktif]],
         ];
@@ -81,6 +82,9 @@ class Pembimbing extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'pembimbing' => Yii::t('app', 'Pembimbing'),
+            'foto' => Yii::t('app', 'Foto'),
+            'jabatan' => Yii::t('app', 'Jabatan'),
+            'tlp' => Yii::t('app', 'Telepon'),
             'status_active' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),

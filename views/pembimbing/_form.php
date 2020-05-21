@@ -11,18 +11,25 @@ use yii\widgets\ActiveForm;
 
 <div class="pembimbing-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => ['enctype' => 'multipart/form-data'],
+    ]); ?>
 
     <?= $form->field($model, 'pembimbing')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status_active')->widget(SwitchInput::classname(), [
+    <?= $form->field($model, 'jabatan')->textInput() ?>
+
+    <?= $form->field($model, 'tlp')->textInput() ?>
+
+    <small class="label pull-right bg-orange">Only .jpg .jpeg</small>
+                <?= $form->field($model, 'foto')->fileInput() ?>
+
+    <!-- <?= $form->field($model, 'status_active')->widget(SwitchInput::classname(), [
         'pluginOptions' => [
             'onText' => 'Active',
             'offText' => 'Deactive',
         ],
-    ]); ?>
-
-    <!-- <?= $form->field($model, 'status_active')->textInput() ?> -->
+    ]); ?> -->
 
     <!-- <?= $form->field($model, 'created_at')->textInput() ?> -->
 
