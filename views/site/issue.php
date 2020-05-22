@@ -31,7 +31,7 @@ $this->title = 'Issue';
                 // 'attribute' => 'pembimbing',
                 'format' => 'raw',
                 'value' => function($data){
-                    return '<h2>'.Html::a('Vol '.$data->vol.', No '.$data->no.'('.$data->years_pub.') : '.date('F', mktime(0, 0, 0, $data->month_pub, 10)).' '.$data->years_pub, ['issue-view', 'id' => $data->id]).'</h2><br>'.Html::img('@web/'.$data->file_cover, ['class' => 'img-responsive']);
+                    return '<h2>'.Html::a('Vol '.$data->vol.', No '.$data->no.'('.$data->years_pub.') : '.date('F', mktime(0, 0, 0, $data->month_pub, 10)).' '.$data->years_pub, ['issue-view', 'id' => $data->id]).'</h2><br>'.Html::img('@web/'.$data->file_cover, ['class' => 'img-responsive','style'=>'width:10%; height:40%']);
                 },
             ],
             // [
