@@ -39,7 +39,7 @@ use dmstr\widgets\Alert;
     <div class="pull-right hidden-xs">
         <b>Version</b> 2.0
     </div>
-    <strong>Copyright &copy; 2019-<?= date('Y'); ?> <a href="http://ftik.usm.ac.id">FTIK</a> Universitas Semarang Theme By <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2019-<?= date('Y'); ?> <a href="http://ftik.usm.ac.id">FTIK</a> Universitas Semarang - Theme By <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
 </footer>
 
 <!-- Control Sidebar -->
