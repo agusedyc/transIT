@@ -12,7 +12,10 @@ use yii\helpers\Html;
     <nav class="navbar navbar-static-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-              <a href="<?= Yii::$app->homeUrl ?>" class="navbar-brand"><b><?= Yii::$app->name ?></b></a>
+              <a href="<?= Yii::$app->homeUrl ?>" class="navbar-brand"><b style="font-size:30px;"><?= Yii::$app->name ?></b>
+
+              </a>
+              <img src="<?= Yii::$app->request->hostInfo.'/uploads/assets/img/ftik-usm.png' ?>" style="width:30%; height: 10%">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                 <i class="fa fa-bars"></i>
               </button>
